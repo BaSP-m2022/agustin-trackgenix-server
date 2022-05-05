@@ -1,6 +1,18 @@
-{
+[{
     "name": "esteban",
     "lastName": "frare",
     "email": "esteban.frare@radiumrocket.com"
 
-}
+}, {
+    "name": "Keriann",
+    "lastName": "Riggeard",
+    "email": "kriggeard0@so-net.ne.jp"
+}, {
+    "name": "Melly",
+    "lastName": "Garroch",
+    "email": "mgarroch1@wisc.edu"
+}, {
+    "name": "Teriann",
+    "lastName": "Gilder",
+    "email": "tgilder2@adobe.com"
+}]
