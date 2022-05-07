@@ -12,6 +12,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/projects', projects.getAll);
+app.get('/projects/:id', projects.getById);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
