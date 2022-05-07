@@ -14,6 +14,8 @@ app.get('/', async (req, res) => {
 app.get('/projects', projects.getAll);
 app.get('/projects/:id', projects.getById);
 
+app.post('/projects/add', projects.create);
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`App listening on port ${port}`);

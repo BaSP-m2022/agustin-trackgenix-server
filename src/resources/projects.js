@@ -1,3 +1,4 @@
+const fs = require('fs');
 const projects = require('../data/projects.json');
 
 function getAll(req, res) {
@@ -14,7 +15,38 @@ function getById(req, res) {
   }
 }
 
+function create(req, res) {
+  const {
+    id, name, description, status, exployees, tasks, timesheet, rates,
+  } = req.body;
+
+  if (id && name && description && status && exployees && tasks && timesheet && rates) {
+    const newProject = {
+      id: parseInt(id, 10),
+      name: name || '',
+      description: description || '',
+      status: status || '',
+      exployees: exployees || '',
+      tasks: tasks || '',
+      timesheet: timesheet || '',
+      rates: rates || '',
+    };
+    projects.push(newProject);
+
+    fs.writeFile('./src/data/projects.json', JSON.stringify(projects), (err) => {
+      if (err) {
+        res.status(404).json({ msg: err });
+      } else {
+        res.status(201).json({ msg: 'Project created', newProject });
+      }
+    });
+  } else {
+    res.status(404).json({ msg: 'Data missing' });
+  }
+}
+
 module.exports = {
   getAll,
   getById,
+  create,
 };
