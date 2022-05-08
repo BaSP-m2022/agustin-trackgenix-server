@@ -1,6 +1,9 @@
 // use "import" to import libraries
 import express from 'express';
 
+// import router
+const employeesRouter = require('./resources/employees');
+
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
 
@@ -18,6 +21,8 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+app.use('/employees', employeesRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
