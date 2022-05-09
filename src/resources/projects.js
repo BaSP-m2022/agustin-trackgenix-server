@@ -45,8 +45,42 @@ function create(req, res) {
   }
 }
 
+function putById(req, res) {
+  const { id } = req.params;
+  const {
+    name, description, status, exployees, tasks, timesheet, rates,
+  } = req.body;
+
+  const updatedProject = {
+    id: parseInt(id, 10),
+    name: name || '',
+    description: description || '',
+    status: status || '',
+    exployees: exployees || '',
+    tasks: tasks || '',
+    timesheet: timesheet || '',
+    rates: rates || '',
+  };
+
+  const projectIndex = projects.findIndex((proj) => proj.id === parseInt(id, 10));
+  if (projectIndex !== -1) {
+    projects[projectIndex] = updatedProject;
+
+    fs.writeFile('./src/data/projects.json', JSON.stringify(projects), (err) => {
+      if (err) {
+        res.status(404).json({ msg: err });
+      } else {
+        res.status(200).json({ msg: 'Project updated', updatedProject });
+      }
+    });
+  } else {
+    res.status(404).json({ msg: 'Project not found' });
+  }
+}
+
 module.exports = {
   getAll,
   getById,
   create,
+  putById,
 };

@@ -14,6 +14,8 @@ app.get('/', async (req, res) => {
 app.get('/projects', projects.getAll);
 app.get('/projects/:id', projects.getById);
 
+app.put('/projects/update/:id', projects.putById);
+
 app.post('/projects/add', projects.create);
 
 app.listen(port, () => {
