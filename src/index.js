@@ -2,7 +2,7 @@
 import express from 'express';
 
 // use "require" to import JSON files
-const admins = require('./data/admins.json');
+const tasks = require('./data/tasks.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,9 +13,9 @@ app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/admins', (req, res) => {
+app.get('/tasks', (req, res) => {
   res.status(200).json({
-    data: admins,
+    data: tasks,
   });
 });
 
