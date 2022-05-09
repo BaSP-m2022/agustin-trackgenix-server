@@ -15,13 +15,17 @@ app.get('/projects', projects.getAll);
 
 app.get('/projects/:id', projects.getById);
 
-app.put('/projects/update/:id', projects.putById);
-
 app.post('/projects/add', projects.create);
 
 app.delete('/projects/delete/:id', projects.deleteById);
 
-app.get('/projects/filterStatus/', projects.getByFilterStatus);
+app.get('/projects/filterStatus/:status', projects.getByStatus);
+
+app.get('/projects/filterName/:name', projects.getByName);
+
+app.post('/projects/addEmployee/:idProject', projects.addEmployee);
+
+app.delete('/projects/deleteEmployee/:idProject/:idEmployee', projects.deleteEmployee);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
