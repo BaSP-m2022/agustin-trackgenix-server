@@ -18,6 +18,66 @@ function getById(req, res) {
   }
 }
 
+//      Get Super-Admins by Status      //
+function getByStatus(req, res) {
+  const { status } = req.params;
+  const superAdminsFilter = superAdmins.filter((supad) => supad.status.toString() === status);
+
+  if (superAdminsFilter) {
+    res.status(200).json(superAdminsFilter);
+  } else {
+    res.status(404).json({ msg: 'Super Admin not found' });
+  }
+}
+
+//      Get Super-Admins by Name      //
+function getByName(req, res) {
+  const { name } = req.params;
+  const superAdminsFilter = superAdmins.filter((supad) => supad.name === name);
+
+  if (superAdminsFilter) {
+    res.status(200).json(superAdminsFilter);
+  } else {
+    res.status(404).json({ msg: 'Super Admin not found' });
+  }
+}
+
+//      Get Super-Admins by Last Name      //
+function getByLastName(req, res) {
+  const { lastName } = req.params;
+  const superAdminsFilter = superAdmins.filter((supad) => supad.lastName === lastName);
+
+  if (superAdminsFilter) {
+    res.status(200).json(superAdminsFilter);
+  } else {
+    res.status(404).json({ msg: 'Super Admin not found' });
+  }
+}
+
+//      Get Super-Admins by E-Mail      //
+function getByEmail(req, res) {
+  const { email } = req.params;
+  const superAdminsFilter = superAdmins.filter((supad) => supad.email === email);
+
+  if (superAdminsFilter) {
+    res.status(200).json(superAdminsFilter);
+  } else {
+    res.status(404).json({ msg: 'Super Admin not found' });
+  }
+}
+
+//      Get Super-Admins by Password      //
+function getByPassword(req, res) {
+  const { password } = req.params;
+  const superAdminsFilter = superAdmins.filter((supad) => supad.password === password);
+
+  if (superAdminsFilter) {
+    res.status(200).json(superAdminsFilter);
+  } else {
+    res.status(404).json({ msg: 'Super Admin not found' });
+  }
+}
+
 //      Create a Super-Admin      //
 function create(req, res) {
   const {
@@ -51,17 +111,15 @@ function create(req, res) {
 function putById(req, res) {
   const { id } = req.params;
   const {
-    name, description, status, exployees, tasks, timesheet, rates,
+    name, lastName, email, password, status,
   } = req.body;
   const updatedSuperAdmin = {
     id: parseInt(id, 10),
     name: name || '',
-    description: description || '',
+    lastName: lastName || '',
+    email: email || '',
+    password: password || '',
     status: status || '',
-    exployees: exployees || '',
-    tasks: tasks || '',
-    timesheet: timesheet || '',
-    rates: rates || '',
   };
   const superAdminIndex = superAdmins.findIndex((proj) => proj.id === parseInt(id, 10));
   if (superAdminIndex !== -1) {
@@ -90,6 +148,11 @@ function deleteById(req, res) {
 module.exports = {
   getAll,
   getById,
+  getByStatus,
+  getByName,
+  getByLastName,
+  getByEmail,
+  getByPassword,
   create,
   putById,
   deleteById,

@@ -14,6 +14,11 @@ app.get('/', async (req, res) => {
 
 app.get('/super-admins', superAdmins.getAll);
 app.get('/super-admins/:id', superAdmins.getById);
+app.get('/super-admins/byStatus/:status', superAdmins.getByStatus);
+app.get('/super-admins/byName/:name', superAdmins.getByName);
+app.get('/super-admins/byEmail/:email', superAdmins.getByEmail);
+app.get('/super-admins/byPassword/:password', superAdmins.getByPassword);
+app.get('/super-admins/byLastName/:lastName', superAdmins.getByLastName);
 app.post('/super-admins/add', superAdmins.create);
 app.put('/super-admins/update/:id', superAdmins.putById);
 app.delete('/super-admins/delete/:id', superAdmins.deleteById);
