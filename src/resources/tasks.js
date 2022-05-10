@@ -35,34 +35,39 @@ const getByFilter = (req, res) => {
 // Create a task
 const create = (req, res) => {
   const newTask = req.body;
-  /*   if (newTask.id && newTask.name && (newTask.details || newTask.details === null)) {
-
-  } */
-  tasks.push(newTask);
-  fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('Task succesfully created');
-    }
-  });
-  res.send(tasks);
+  if (newTask.id && newTask.name && (newTask.details || newTask.details.length === 0)) {
+    tasks.push(newTask);
+    fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Task succesfully created');
+      }
+    });
+    res.send(tasks);
+  } else {
+    res.send('To create a task is required: id, name and details.');
+  }
 };
 
 // Edit a task
 const updateById = (req, res) => {
-  const found = tasks.some((task) => task.id === parseInt(req.params.id, 10));
-  if (found) {
-    const editTask = req.body;
-    tasks.forEach((task) => {
-      if (task.id === parseInt(req.params.id, 10)) {
-        task.name = editTask.name ? editTask.name : task.name;
-        task.details = editTask.details ? editTask.details : task.details;
-        res.json({ msg: 'Task updated', task });
-      }
-    });
+  const { id } = req.params;
+  const {
+    name, details,
+  } = req.body;
+  const updatedTask = {
+    id: parseInt(id, 10),
+    name: name || '',
+    details: details || '',
+  };
+  const taskIndex = tasks.findIndex((proj) => proj.id === parseInt(id, 10));
+  if (taskIndex !== -1) {
+    tasks[taskIndex] = updatedTask;
+    fs.writeFileSync('./src/data/tasks.json', JSON.stringify(tasks));
+    res.status(200).json({ msg: 'Task updated', updatedTask });
   } else {
-    res.status(400).json({ msg: `No task found with the id of ${req.params.id}` });
+    res.status(404).json({ msg: 'Task not found' });
   }
 };
 
