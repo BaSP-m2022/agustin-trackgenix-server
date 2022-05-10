@@ -1,4 +1,30 @@
-[{"id":"1","proyectId":1,"employeeId":1,"date":"12/13/2021","startTime":"19:12","endTime":"19:47","regularHours":1,"overtimeHours":1,"task":[{"id":"1","date":"7/15/2021"},{"id":"2","date":"10/2/2021"}]},
-{"id":"2","proyectId":2,"employeeId":2,"date":"5/19/2020","startTime":"21:27","endTime":"4:21","regularHours":2,"overtimeHours":2,"task":[{"id":"1","date":"6/10/2021"}]},
-{"id":"3","proyectId":3,"employeeId":3,"date":"1/23/2022","startTime":"3:53","endTime":"16:57","regularHours":3,"overtimeHours":3,"task":[{"id":"1","date":"12/16/2021"},{"id":"2","date":"4/2/2022"},{"id":"3","date":"10/9/2021"},{"id":"4","date":"9/12/2021"}]},
-{"id":"15","proyectId":15,"employeeId":15,"date":"01/28/2002","startTime":"08:45","endTime":"21:00","regularHours":8,"overtimeHours":2,"task":[{"id":"15","date":"12/15/2020"}]}]
+[
+  {
+    "id":"1",
+    "proyectId":1,
+    "employeeId":1,
+    "date":"12/13/2021",
+    "startTime":"19:12",
+    "endTime":"19:47",
+    "regularHours":1,
+    "overtimeHours":1,
+    "task": [{
+      "id":"1",
+      "date":"07/15/2021"
+    }]
+  },
+  {
+    "id":"2",
+    "proyectId":2,
+    "employeeId":2,
+    "date":"02/15/2021",
+    "startTime":"08:12",
+    "endTime":"20:30",
+    "regularHours":2,
+    "overtimeHours":2,
+    "task": [{
+      "id":"2",
+      "date":"08/18/2021"
+    }]
+  }
+]
