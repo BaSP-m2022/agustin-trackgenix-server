@@ -4,6 +4,36 @@ const employees = require('../data/employees.json');
 
 const router = express.Router();
 
+router.get('/getAll', (req, res) => {
+  res.send(employees);
+});
+
+router.get('/getById/:id', (req, res) => {
+  const employeeId = req.params.id;
+  const employee = employees.find((e) => e.id === employeeId);
+  if (employee) {
+    res.send(employee);
+  } else {
+    res.send('Employee not found');
+  }
+});
+
+router.delete('/delete/:id', (req, res) => {
+  const deleteId = req.params.id;
+  const listEmployee = employees.filter((e) => e.id !== deleteId);
+  if (employees.length === listEmployee.length) {
+    res.send('Id not found');
+  } else {
+    fs.writeFile('src/data/employees.json', JSON.stringify(listEmployee), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Employee deleted!');
+      }
+    });
+  }
+});
+
 router.get('/getByRole', (req, res) => {
   const inputRole = req.query.rol;
   const listRole = employees.filter((employee) => employee.rol === inputRole);
@@ -13,6 +43,7 @@ router.get('/getByRole', (req, res) => {
     res.send('Role not found');
   }
 });
+
 router.get('/status/:status', (req, res) => {
   const { status } = req.params;
   const employeesFiltered = employees.filter((emp) => emp.status.toString() === status);
@@ -55,6 +86,7 @@ router.post('/add', (req, res) => {
     });
   }
 });
+
 router.put('/update/:id', (req, res) => {
   const exist = employees.some((e) => e.id === req.params.id);
   if (exist) {

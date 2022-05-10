@@ -1,170 +1,170 @@
 [
-    {
-        "id": "2",
-        "name": "Birgitta",
-        "lastName": "Leteurtre",
-        "dni": "578452",
-        "address": "619 Buena Vista Avenue",
-        "city": "Geshan",
-        "zip": null,
-        "mail": "bleteurtre1@sfgate.com",
-        "password": "bVTpeyc",
-        "projects": [
-            {
-                "name": "Regrant"
-            },
-            {
-                "name": "Fixflex"
-            }
-        ],
-        "rol": "Electrician",
-        "status": true
-    },
-    {
-        "id": "3",
-        "name": "Ram",
-        "lastName": "Licciardo",
-        "dni": "4521548",
-        "address": "9281 Ohio Plaza",
-        "city": "Chillán",
-        "zip": null,
-        "mail": "rlicciardo2@businesswire.com",
-        "password": "cxvl7e",
-        "projects": [],
-        "rol": "Project Manager",
-        "status": true
-    },
-    {
-        "id": "4",
-        "name": "Vina",
-        "lastName": "Ferby",
-        "dni": "5454545",
-        "address": "52 Lillian Circle",
-        "city": "Lanci Satu",
-        "zip": null,
-        "mail": "vferby3@photobucket.com",
-        "password": "JaLiFNU52o",
-        "projects": [],
-        "rol": "Architect",
-        "status": true
-    },
-    {
-        "id": "5",
-        "name": "Berk",
-        "lastName": "Faircliffe",
-        "dni": "1245242",
-        "address": "8 Emmet Crossing",
-        "city": "Lengshuitan",
-        "zip": null,
-        "mail": "bfaircliffe4@altervista.org",
-        "password": "xSwfSk5Obi",
-        "projects": [],
-        "rol": "Surveyor",
-        "status": false
-    },
-    {
-        "id": "6",
-        "name": "Tito",
-        "lastName": "O'Dwyer",
-        "dni": "124548",
-        "address": "80484 Crownhardt Hill",
-        "city": "Longxi",
-        "zip": null,
-        "mail": "todwyer5@nba.com",
-        "password": "VEwZ5h96",
-        "projects": [
-            {
-                "name": "Lotstring"
-            },
-            {
-                "name": "Voyatouch"
-            },
-            {
+  {
+    "id": "2",
+    "name": "Birgitta",
+    "lastName": "Leteurtre",
+    "dni": "578452",
+    "address": "619 Buena Vista Avenue",
+    "city": "Geshan",
+    "zip": null,
+    "mail": "bleteurtre1@sfgate.com",
+    "password": "bVTpeyc",
+    "projects": [
+      {
+        "name": "Regrant"
+      },
+      {
+        "name": "Fixflex"
+      }
+    ],
+    "rol": "Electrician",
+    "status": true
+  },
+  {
+    "id": "3",
+    "name": "Ram",
+    "lastName": "Licciardo",
+    "dni": "4521548",
+    "address": "9281 Ohio Plaza",
+    "city": "Chillán",
+    "zip": null,
+    "mail": "rlicciardo2@businesswire.com",
+    "password": "cxvl7e",
+    "projects": [],
+    "rol": "Project Manager",
+    "status": true
+  },
+  {
+    "id": "4",
+    "name": "Vina",
+    "lastName": "Ferby",
+    "dni": "5454545",
+    "address": "52 Lillian Circle",
+    "city": "Lanci Satu",
+    "zip": null,
+    "mail": "vferby3@photobucket.com",
+    "password": "JaLiFNU52o",
+    "projects": [],
+    "rol": "Architect",
+    "status": true
+  },
+  {
+    "id": "5",
+    "name": "Berk",
+    "lastName": "Faircliffe",
+    "dni": "1245242",
+    "address": "8 Emmet Crossing",
+    "city": "Lengshuitan",
+    "zip": null,
+    "mail": "bfaircliffe4@altervista.org",
+    "password": "xSwfSk5Obi",
+    "projects": [],
+    "rol": "Surveyor",
+    "status": false
+  },
+  {
+    "id": "6",
+    "name": "Tito",
+    "lastName": "O'Dwyer",
+    "dni": "124548",
+    "address": "80484 Crownhardt Hill",
+    "city": "Longxi",
+    "zip": null,
+    "mail": "todwyer5@nba.com",
+    "password": "VEwZ5h96",
+    "projects": [
+      {
+        "name": "Lotstring"
+      },
+      {
+        "name": "Voyatouch"
+      },
+      {
                 "name": "Cardify"
-            }
-        ],
-        "rol": "Construction Worker",
-        "status": false
-    },
-    {
-        "id": "7",
-        "name": "Alla",
-        "lastName": "Bousfield",
-        "dni": "1245421",
-        "address": "86 Lillian Place",
-        "city": "Chigasaki",
-        "zip": "253-0041",
-        "mail": "abousfield6@theglobeandmail.com",
-        "password": "ndmLRUVAIwsN",
-        "projects": [],
-        "rol": "Construction Worker",
-        "status": true
-    },
-    {
-        "id": "8",
-        "name": "Terese",
-        "lastName": "Pulsford",
-        "dni": "77854845",
-        "address": "080 West Junction",
-        "city": "Zharkent",
-        "zip": null,
-        "mail": "tpulsford7@marriott.com",
-        "password": "wPXfdQrbZk1Q",
-        "projects": [],
-        "rol": "Project Manager",
-        "status": true
-    },
-    {
-        "id": "9",
-        "name": "Grenville",
-        "lastName": "Botwright",
-        "dni": "545482",
-        "address": "9 Cordelia Crossing",
-        "city": "Los Mangos",
-        "zip": "93228",
-        "mail": "gbotwright8@taobao.com",
-        "password": "LHpaZj",
-        "projects": [
-            {
-                "name": "Cardify"
-            }
-        ],
-        "rol": "Estimator",
-        "status": false
-    },
-    {
-        "id": "10",
-        "name": "cambiado",
-        "lastName": "cambiado",
-        "dni": "4542121",
-        "address": "5 Havey Drive",
-        "city": "Tabalong",
-        "zip": "1060",
-        "mail": "rbodimeade9@craigslist.org",
-        "password": "YgfnDbKfs7YD",
-        "projects": [],
-        "rol": "Electrician",
-        "status": false
-    },
-    {
-        "id": "25",
-        "name": "Gina",
-        "lastName": "SCshdfjsdhf",
-        "dni": "43434",
-        "address": "619 Buena",
-        "city": "Geshan",
-        "zip": null,
-        "mail": "bleteurtrdsdse1@sfgate.com",
-        "password": "dsdds",
-        "projects": [
-            {
-                "name": "Regrant"
-            },
-            {
-                "name": "Fixflex"
-            }
-        ],
-        "rol": "Electrician",
-        "status": true
-    }
+      }
+    ],
+    "rol": "Construction Worker",
+    "status": false
+  },
+  {
+    "id": "7",
+    "name": "Alla",
+    "lastName": "Bousfield",
+    "dni": "1245421",
+    "address": "86 Lillian Place",
+    "city": "Chigasaki",
+    "zip": "253-0041",
+    "mail": "abousfield6@theglobeandmail.com",
+    "password": "ndmLRUVAIwsN",
+    "projects": [],
+    "rol": "Construction Worker",
+    "status": true
+  },
+  {
+    "id": "8",
+    "name": "Terese",
+    "lastName": "Pulsford",
+    "dni": "77854845",
+    "address": "080 West Junction",
+    "city": "Zharkent",
+    "zip": null,
+    "mail": "tpulsford7@marriott.com",
+    "password": "wPXfdQrbZk1Q",
+    "projects": [],
+    "rol": "Project Manager",
+    "status": true
+  },
+  {
+    "id": "9",
+    "name": "Grenville",
+    "lastName": "Botwright",
+    "dni": "545482",
+    "address": "9 Cordelia Crossing",
+    "city": "Los Mangos",
+    "zip": "93228",
+    "mail": "gbotwright8@taobao.com",
+    "password": "LHpaZj",
+    "projects": [
+      {
+        "name": "Cardify"
+      }
+    ],
+    "rol": "Estimator",
+    "status": false
+  },
+  {
+    "id": "10",
+    "name": "cambiado",
+    "lastName": "cambiado",
+    "dni": "4542121",
+    "address": "5 Havey Drive",
+    "city": "Tabalong",
+    "zip": "1060",
+    "mail": "rbodimeade9@craigslist.org",
+    "password": "YgfnDbKfs7YD",
+    "projects": [],
+    "rol": "Electrician",
+    "status": false
+  },
+  {
+    "id": "25",
+    "name": "Gina",
+    "lastName": "SCshdfjsdhf",
+    "dni": "43434",
+    "address": "619 Buena",
+    "city": "Geshan",
+    "zip": null,
+    "mail": "bleteurtrdsdse1@sfgate.com",
+    "password": "dsdds",
+    "projects": [
+      {
+        "name": "Regrant"
+      },
+      {
+        "name": "Fixflex"
+      }
+    ],
+    "rol": "Electrician",
+    "status": true
+  }
 ]

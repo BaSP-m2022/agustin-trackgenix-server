@@ -50,6 +50,8 @@ app.post('/addAdmin', admins.addAdmin);
 app.delete('/deleteAdmin/:id', admins.deleteAdmin);
 app.put('/updateAdmin/:id', admins.updateAdmin);
 
+app.use('/employees', employeesRouter);
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`App listening on port ${port}`);
