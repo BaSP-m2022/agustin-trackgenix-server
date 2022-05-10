@@ -29,14 +29,20 @@ router.get('/getByDate', (req, res) => {
 // -------------Post method
 router.post('/add', (req, res) => {
   const timeSheetData = req.body;
-  timeSheets.push(timeSheetData);
-  fileSystem.writeFile('src/data/time-sheets.json', JSON.stringify(timeSheets), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(`Timesheet registered\n ${JSON.stringify(timeSheetData)}`);
-    }
-  });
+  if (timeSheetData.id && timeSheetData.proyectId && timeSheetData.employeeId
+    && timeSheetData.date && timeSheetData.startTime && timeSheetData.endTime
+    && timeSheetData.regularHours && timeSheetData.overtimeHours && timeSheetData.task) {
+    timeSheets.push(timeSheetData);
+    fileSystem.writeFile('src/data/time-sheets.json', JSON.stringify(timeSheets), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(`Timesheet registered\n ${JSON.stringify(timeSheetData)}`);
+      }
+    });
+  } else {
+    res.send('Post error: data incomplete');
+  }
 });
 // -------------Delete method
 router.delete('/deleteById/:id', (req, res) => {
