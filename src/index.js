@@ -1,5 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
+import admins from './resources/admins';
 import projects from './resources/projects';
 import superAdmins from './resources/super-admins';
 
@@ -33,6 +34,12 @@ app.get('/super-admins/byLastName/:lastName', superAdmins.getByLastName);
 app.post('/super-admins/add', superAdmins.create);
 app.put('/super-admins/update/:id', superAdmins.putById);
 app.delete('/super-admins/delete/:id', superAdmins.deleteById);
+
+app.get('/getAdminById/:id', admins.getAdmin);
+app.get('/getAdminByStatus', admins.getStatus);
+app.post('/addAdmin', admins.addAdmin);
+app.delete('/deleteAdmin/:id', admins.deleteAdmin);
+app.put('/updateAdmin/:id', admins.updateAdmin);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
