@@ -4,6 +4,9 @@ import projects from './resources/projects';
 import admins from './resources/admins';
 import superAdmins from './resources/super-admins';
 
+// import router
+const employeesRouter = require('./resources/employees');
+
 // use "require" to import JSON files
 const timeSheetsRouter = require('./resources/time-sheets');
 
@@ -40,6 +43,7 @@ app.post('/super-admins/add', superAdmins.create);
 app.put('/super-admins/update/:id', superAdmins.putById);
 app.delete('/super-admins/delete/:id', superAdmins.deleteById);
 
+app.use('/employees', employeesRouter);
 app.get('/getAdminById/:id', admins.getAdmin);
 app.get('/getAdminByStatus', admins.getStatus);
 app.post('/addAdmin', admins.addAdmin);
