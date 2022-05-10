@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-/* const fs = require('fs'); */
+/* eslint-disable max-len */
+const fs = require('fs');
 const tasks = require('../data/tasks.json');
 
 // Gets all tasks
@@ -32,11 +33,21 @@ const getByFilter = (req, res) => {
 };
 
 // Create a task
-/* const create = (req, res) => {
-  const newTask = {
+const create = (req, res) => {
+  const newTask = req.body;
+  /*   if (newTask.id && newTask.name && (newTask.details || newTask.details === null)) {
 
-  };
-}; */
+  } */
+  tasks.push(newTask);
+  fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('Task succesfully created');
+    }
+  });
+  res.send(tasks);
+};
 
 // Edit a task
 const updateById = (req, res) => {
@@ -57,11 +68,18 @@ const updateById = (req, res) => {
 
 // Delete task
 const deleteById = (req, res) => {
-  const found = tasks.some((task) => task.id === parseInt(req.params.id, 10));
-  if (found) {
-    res.json({ msg: 'Task deleted', tasks: tasks.filter((task) => task.id !== parseInt(req.params.id, 10)) });
+  /*   const idToDelete = req.params.id; */
+  const remainingTasks = tasks.filter((task) => task.id !== parseInt(req.params.id, 10));
+  if (tasks.length === remainingTasks.length) {
+    res.send(`Could not find the task with id: ${req.params.id}, therefore it cannot be deleted.`);
   } else {
-    res.status(400).json({ msg: `No task found with the id of ${req.params.id}` });
+    fs.writeFile('src/data/tasks.json', JSON.stringify(remainingTasks), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Task succesfully deleted!');
+      }
+    });
   }
 };
 
@@ -71,5 +89,5 @@ module.exports = {
   updateById,
   deleteById,
   getByFilter,
-/*   create, */
+  create,
 };

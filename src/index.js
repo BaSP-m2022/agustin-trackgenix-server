@@ -14,11 +14,12 @@ app.get('/', async (req, res) => {
 });
 
 // tasks router
-app.get('/tasks', tasks.getAll);
+app.get('/tasks/getAll', tasks.getAll);
 app.get('/tasks/getByFilter', tasks.getByFilter);
-app.get('/tasks/:id', tasks.getById);
-app.put('/tasks/:id', tasks.updateById);
-app.delete('/tasks/:id', tasks.deleteById);
+app.get('/tasks/getById/:id', tasks.getById);
+app.post('/tasks/add', tasks.create);
+app.put('/tasks/updateById/:id', tasks.updateById);
+app.delete('/tasks/deleteById/:id', tasks.deleteById);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
