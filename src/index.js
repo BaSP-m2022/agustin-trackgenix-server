@@ -1,7 +1,7 @@
 // use "import" to import libraries
 import express from 'express';
-import admins from './resources/admins';
 import projects from './resources/projects';
+import admins from './resources/admins';
 import superAdmins from './resources/super-admins';
 
 // use "require" to import JSON files
@@ -13,6 +13,7 @@ app.use(express.json());
 app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
+
 // projects router
 app.get('/projects', projects.getAll);
 app.get('/projects/:id', projects.getById);
@@ -22,6 +23,7 @@ app.get('/projects/filterStatus/:status', projects.getByStatus);
 app.get('/projects/filterName/:name', projects.getByName);
 app.post('/projects/addEmployee/:idProject', projects.addEmployee);
 app.delete('/projects/deleteEmployee/:idProject/:idEmployee', projects.deleteEmployee);
+app.put('/projects/update/:id', projects.putById);
 
 // super-admin router
 app.get('/super-admins', superAdmins.getAll);

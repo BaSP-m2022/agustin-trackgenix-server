@@ -863,26 +863,13 @@
     "name": "Hall's Rush",
     "description": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
     "status": true,
-    "employees": [],
+    "exployees": [],
     "tasks": [
-      {
-        "id": 1,
-        "date": "9/16/2021"
-      },
-      {
-        "id": 2,
-        "date": "4/3/2022"
-      }
+      { "id": 1, "date": "9/16/2021" },
+      { "id": 2, "date": "4/3/2022" }
     ],
-    "timesheet": {
-      "id": 51,
-      "date": "11/2/2020"
-    },
-    "rates": {
-      "dev": 34,
-      "pm": 58,
-      "qa": 3
-    }
+    "timesheet": { "id": 51, "date": "11/2/2020" },
+    "rates": { "dev": 34, "pm": 58, "qa": 3 }
   },
   {
     "id": 21,
