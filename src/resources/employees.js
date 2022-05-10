@@ -13,6 +13,30 @@ router.get('/getByRole', (req, res) => {
     res.send('Role not found');
   }
 });
+router.get('/status/:status', (req, res) => {
+  const { status } = req.params;
+  const employeesFiltered = employees.filter((emp) => emp.status.toString() === status);
+  if (employeesFiltered) {
+    res.status(200).json(employeesFiltered);
+  } else {
+    res.status(404).json({ msg: 'Project not found' });
+  }
+});
+
+router.get('/projects/:project', (req, res) => {
+  const { project } = req.params;
+  const listProject = [];
+  employees.forEach((emp) => emp.projects.forEach((pro) => {
+    if (pro.name === project) {
+      listProject.push(emp);
+    }
+  }));
+  if (listProject.length > 0) {
+    res.status(200).json(listProject);
+  } else {
+    res.status(404).json({ msg: 'Employees not found' });
+  }
+});
 
 router.post('/add', (req, res) => {
   const newId = req.body.id;
@@ -31,7 +55,7 @@ router.post('/add', (req, res) => {
     });
   }
 });
-router.post('/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
   const exist = employees.some((e) => e.id === req.params.id);
   if (exist) {
     const employeeFiltered = employees.filter((employee) => employee.id !== req.params.id);
