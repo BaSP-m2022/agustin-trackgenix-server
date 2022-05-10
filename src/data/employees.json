@@ -80,7 +80,7 @@
                 "name": "Voyatouch"
             },
             {
-                "name": "Duobam"
+                "name": "Cardify"
             }
         ],
         "rol": "Construction Worker",
@@ -145,5 +145,26 @@
         "projects": [],
         "rol": "Electrician",
         "status": false
+    },
+    {
+        "id": "25",
+        "name": "Gina",
+        "lastName": "SCshdfjsdhf",
+        "dni": "43434",
+        "address": "619 Buena",
+        "city": "Geshan",
+        "zip": null,
+        "mail": "bleteurtrdsdse1@sfgate.com",
+        "password": "dsdds",
+        "projects": [
+            {
+                "name": "Regrant"
+            },
+            {
+                "name": "Fixflex"
+            }
+        ],
+        "rol": "Electrician",
+        "status": true
     }
 ]
