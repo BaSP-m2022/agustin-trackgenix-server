@@ -75,7 +75,7 @@ const updateAdmin = (req, resp) => {
       if (err) {
         resp.send(err);
       } else {
-        resp.send('The Admin was succesfully updated', adminUpdated);
+        resp.send('The Admin was succesfully updated');
       }
     });
   } else {
