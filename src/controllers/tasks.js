@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-/* eslint-disable no-param-reassign */
-/* eslint-disable max-len */
 const fs = require('fs');
-const tasks = require('../data/tasks.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const tasks = [];
 
 // Gets all tasks
 const getAll = (req, res) => {
@@ -24,7 +23,9 @@ const getById = (req, res) => {
 // Filter by partial name value
 const getByFilter = (req, res) => {
   const query = req.query.name;
-  const tasksFiltered = tasks.filter((val) => val.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+  const tasksFiltered = tasks
+    .filter((val) => val.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+
   if (tasksFiltered.length > 0) {
     res.send(tasksFiltered);
   } else {
