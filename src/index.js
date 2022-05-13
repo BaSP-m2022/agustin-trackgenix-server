@@ -19,7 +19,7 @@ mongoose.connect(
 );
 
 // routes
-app.use(router);
+app.use('/api', router);
 
 app.get('/', async (req, res) => {
   res.status(200).json({
