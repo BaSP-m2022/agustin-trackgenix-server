@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
-const employees = require('../data/employees.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const employees = [];
 
 const router = express.Router();
 

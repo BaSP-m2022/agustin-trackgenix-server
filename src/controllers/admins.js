@@ -1,10 +1,10 @@
-/* eslint-disable radix */
-/* eslint-disable consistent-return */
 const fs = require('fs');
-const admins = require('../data/admins.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const admins = [];
 
 const getAdmin = (req, resp) => {
-  const adminId = parseInt(req.params.id);
+  const adminId = parseInt(req.params.id, 10);
   // eslint-disable-next-line no-shadow
   const admin = admins.find((admin) => admin.id === adminId);
   if (admin) {
@@ -41,7 +41,7 @@ const addAdmin = (req, resp) => {
 };
 
 const deleteAdmin = (req, resp) => {
-  const adminFilter = admins.filter((admin) => admin.id !== parseInt(req.params.id));
+  const adminFilter = admins.filter((admin) => admin.id !== parseInt(req.params.id, 10));
   if (adminFilter.length !== admins.length) {
     fs.writeFile('src/data/admins.json', JSON.stringify(adminFilter), (err) => {
       if (err) {

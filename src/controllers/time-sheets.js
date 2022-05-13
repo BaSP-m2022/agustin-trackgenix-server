@@ -1,6 +1,8 @@
 const express = require('express');
 const fileSystem = require('fs');
-const timeSheets = require('../data/time-sheets.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const timeSheets = [];
 
 const router = express.Router();
 // -------------Get methods

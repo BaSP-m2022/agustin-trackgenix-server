@@ -1,6 +1,8 @@
 //      Variables      //
 const fs = require('fs');
-const superAdmins = require('../data/super-admins.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const superAdmins = [];
 
 //      Get All Super-Admins      //
 function getAll(req, res) {

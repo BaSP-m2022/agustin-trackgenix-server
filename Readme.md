@@ -1,5 +1,7 @@
 # BaSP 2022 - Trackgenix server
 
+Join [Postman Workspace](https://app.getpostman.com/join-team?invite_code=88f31a66a929cd721f0a38fb08d75225&target_code=013de1cef5d84e450c343c21b81ae452)
+
 Trackgenix is a system that provides Human Resources services to companies.
 
 <br>

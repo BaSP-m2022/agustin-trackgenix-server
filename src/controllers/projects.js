@@ -1,5 +1,7 @@
 const fs = require('fs');
-const projects = require('../data/projects.json');
+
+// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
+const projects = [];
 
 function deleteById(req, res) {
   const { id } = req.params;
