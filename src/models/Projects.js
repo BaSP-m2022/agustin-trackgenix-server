@@ -7,6 +7,9 @@ const projectSchema = new Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     status: { type: String, required: true },
+    client: { type: String, required: true },
+    // startDate: { type: Date, required: true },
+    // endDate: { type: Date, required: true },
     employees: [
       {
         name: { type: String, required: true },
@@ -14,14 +17,6 @@ const projectSchema = new Schema(
         role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
       },
     ],
-    tasks: [
-      {
-        date: { type: Date, required: true },
-      },
-    ],
-    timesheet: {
-      date: { type: Date, required: true },
-    },
     rates: {
       dev: { type: Number, required: true },
       pm: { type: Number, required: true },
@@ -31,4 +26,4 @@ const projectSchema = new Schema(
   { timestamps: true },
 );
 
-export default mongoose.model('Projects', projectSchema);
+export default mongoose.model('Project', projectSchema);
