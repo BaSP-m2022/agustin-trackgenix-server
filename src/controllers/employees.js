@@ -1,109 +1,133 @@
-const express = require('express');
-const fs = require('fs');
+const Employees = require('../models/Employees');
 
-// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
-const employees = [];
+const listEmployees = (req, res) => {
+  Employees.find(req.query)
+    .then((employee) => res.status(200).json(employee))
+    .catch((error) => res.status(400).json({ message: error }));
+};
 
-const router = express.Router();
-
-router.get('/getAll', (req, res) => {
-  res.send(employees);
-});
-
-router.get('/getById/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const employee = employees.find((e) => e.id === employeeId);
-  if (employee) {
-    res.send(employee);
-  } else {
-    res.send('Employee not found');
-  }
-});
-
-router.delete('/delete/:id', (req, res) => {
-  const deleteId = req.params.id;
-  const listEmployee = employees.filter((e) => e.id !== deleteId);
-  if (employees.length === listEmployee.length) {
-    res.send('Id not found');
-  } else {
-    fs.writeFile('src/data/employees.json', JSON.stringify(listEmployee), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Employee deleted!');
-      }
-    });
-  }
-});
-
-router.get('/getByRole', (req, res) => {
-  const inputRole = req.query.rol;
-  const listRole = employees.filter((employee) => employee.rol === inputRole);
-  if (listRole.length > 0) {
-    res.send(listRole);
-  } else {
-    res.send('Role not found');
-  }
-});
-
-router.get('/status/:status', (req, res) => {
-  const { status } = req.params;
-  const employeesFiltered = employees.filter((emp) => emp.status.toString() === status);
-  if (employeesFiltered) {
-    res.status(200).json(employeesFiltered);
-  } else {
-    res.status(404).json({ msg: 'Project not found' });
-  }
-});
-
-router.get('/projects/:project', (req, res) => {
-  const { project } = req.params;
-  const listProject = [];
-  employees.forEach((emp) => emp.projects.forEach((pro) => {
-    if (pro.name === project) {
-      listProject.push(emp);
+const findEmployeeById = (req, res) => {
+  Employees.findById(req.params.id, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employee with that ID does not exist' });
     }
-  }));
-  if (listProject.length > 0) {
-    res.status(200).json(listProject);
-  } else {
-    res.status(404).json({ msg: 'Employees not found' });
-  }
-});
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return (employee) => res.status(200).json(employee);
+  });
+};
 
-router.post('/add', (req, res) => {
-  const newId = req.body.id;
-  const exist = employees.some((e) => e.id === newId);
-  if (exist) {
-    res.send('an employee with that ID cannot be added because it already exists');
-  } else {
-    const employeeData = req.body;
-    employees.push(employeeData);
-    fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Employee created!');
-      }
-    });
-  }
-});
+const deleteEmployee = (req, res) => {
+  Employees.findByIdAndDelete(req.params.id, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employee with that ID does not exist' });
+    }
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return res.status(204).send();
+  });
+};
 
-router.put('/update/:id', (req, res) => {
-  const exist = employees.some((e) => e.id === req.params.id);
-  if (exist) {
-    const employeeFiltered = employees.filter((employee) => employee.id !== req.params.id);
-    const employeeNewData = req.body;
-    employeeFiltered.push(employeeNewData);
-    fs.writeFile('src/data/employees.json', JSON.stringify(employeeFiltered), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Employee updates succesfully');
-      }
+const findEmployeeByRol = (req, res) => {
+  Employees.findOne(req.params.rol, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employee with that Rol does not exist' });
+    }
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return (employee) => res.status(200).json(employee);
+  });
+};
+
+const findEmployeesByStatus = (req, res) => {
+  Employees.find(req.params.status, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employees with that Status do not exist' });
+    }
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return (employee) => res.status(200).json(employee);
+  });
+};
+
+const findEmployeesByProject = (req, res) => {
+  Employees.find(req.params.project, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employees with that Project do not exist' });
+    }
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return (employee) => res.status(200).json(employee);
+  });
+};
+
+const createEmployee = (req, res) => {
+  const employee = new Employees({
+    name: req.body.name,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    dni: req.body.dni,
+    address: req.body.address,
+    city: req.body.city,
+    zip: req.body.zip,
+    status: true,
+    rol: req.body.rol,
+    projects: req.body.projects,
+  });
+
+  employee.save((error, newEmployee) => {
+    if (error) {
+      return res.status(400).json({ message: error });
+    }
+    return res.status(201).json(newEmployee);
+  });
+};
+
+const editEmployee = (req, res) => {
+  Employees.findByIdAndUpdate(req.params.id, () => {
+    const employee = new Employees({
+      name: req.body.name,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      dni: req.body.dni,
+      address: req.body.address,
+      city: req.body.city,
+      zip: req.body.zip,
+      status: true,
+      rol: req.body.rol,
+      projects: req.body.projects,
     });
-  } else {
-    res.send('There is no employee with that id');
-  }
-});
-module.exports = router;
+
+    employee.save((error, newEmployee) => {
+      if (error) {
+        return res.status(400).json({ message: error });
+      }
+      return res.status(201).json(newEmployee);
+    });
+  }, (error, chosenEmployee) => {
+    if (!chosenEmployee) {
+      return res.status(404).json({ message: 'Employee with that ID does not exist' });
+    }
+    if (error) {
+      return res.status(400).json(error);
+    }
+    return (employee) => res.status(200).json(employee);
+  });
+};
+module.exports = {
+  listEmployees,
+  findEmployeeById,
+  deleteEmployee,
+  findEmployeeByRol,
+  findEmployeesByStatus,
+  findEmployeesByProject,
+  createEmployee,
+  editEmployee,
+};

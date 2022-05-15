@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const EmployeeSchema = new Schema({
-  id: Joi.string().alphanum(),
   name: Joi.string().required().min(3),
   lastName: Joi.string().required().min(3),
   email: Joi.string().email().lowercase().required(),
