@@ -1,116 +1,151 @@
-import models from '../models/Projects';
+import Projects from '../models/Projects';
 
-// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
-const projects = [];
-
-// const getAllProjects = async (req, res) => {
-//   try {
-//     const allProjects = await models.Project.find(());
-//     return res.status(200).json(allProjects);
-//   } catch (error) {
-//     res.status(500).json({
-//       msg: 'There was an error',
-//     });
-//   }
-// };
 const getAllProjects = async (req, res) => {
   try {
-    res.status(200).json(projects);
+    const projects = await Projects.find(req.query);
+    if (projects.length < 1) {
+      return res.status(404).json({
+        message: 'Projects has not been found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'success',
+      data: projects,
+      error: false,
+    });
   } catch (error) {
-    res.status(500).json({
-      msg: 'error',
+    return res.json({
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
     });
   }
 };
-
-const createProject = async (req, res) => {
-  try {
-    const project = new models.Project({
-      name: req.body.name,
-      description: req.body.description,
-      status: req.body.status,
-      employees: req.body.employees,
-      tasks: req.body.tasks,
-      timesheet: req.body.timesheet,
-      rates: req.body.rates,
+const createProject = (req, res) => {
+  const project = new Projects({
+    name: req.body.name,
+    description: req.body.description,
+    status: req.body.status,
+    client: req.body.client,
+    employees: req.body.employees,
+    tasks: req.body.tasks,
+    timesheet: req.body.timesheet,
+    rates: req.body.rates,
+  });
+  project.save((error, newProject) => {
+    if (error) {
+      return res.status(400).json({
+        message: error,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Project created',
+      data: newProject,
+      error: false,
     });
-    const result = await project.save();
-    return res.status(201).json(result);
-  } catch (error) {
-    console.log(error);
-    console.log(req.body.name);
-    console.log(req.body.employees);
-    return res.json({
-      msg: 'an error has ocurred',
-    });
-  }
+  });
 };
 
 const getProjectById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const project = await models.Project.findById(req.params.id);
-      return res.status(200).json(project);
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      const project = await Projects.findById(req.params.id);
+      if (!project) {
+        return res.status(404).json({
+          message: `Project with id: ${req.params.id} has not beenfound`,
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'success',
+        data: project,
+        error: false,
+      });
     }
     return res.status(400).json({
-      msg: 'missing parameter',
+      message: 'ID format is not valid',
+      data: req.params.id,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
     });
   }
 };
 
 const updateProject = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'missing parameter',
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      const result = await Projects.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true },
+      );
+      if (!result) {
+        return res.status(404).json({
+          message: 'The project has not been found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'The project updated successfully',
+        data: result,
+        error: false,
       });
     }
-    const result = await models.Project.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The project has not been found',
-      });
-    }
-    return res.status(200).json(result);
+    return res.status(400).json({
+      message: 'ID format is not valid',
+      data: req.params.id,
+      error: true,
+    });
   } catch (error) {
     return res.json({
-      msg: 'An error has ocurred',
-      error: error.details[0].message,
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
     });
   }
 };
 
 const deleteProject = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'missing parameter',
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      const result = await Projects.findByIdAndDelete(req.params.id);
+      if (!result) {
+        return res.status(404).json({
+          message: `Id ${req.params.id} does not exist`,
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'The project deleted successfully',
+        data: result,
+        error: false,
       });
     }
-    const result = await models.Project.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The project has not been found',
-      });
-    }
-    return res.status(200).json({
-      msg: 'The project has been successfully deleted',
+    return res.status(400).json({
+      message: 'ID format is not valid',
+      data: req.params.id,
+      error: true,
     });
   } catch (error) {
-    return res.json({
-      msg: 'An error has ocurred',
+    return res.status(400).json({
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
     });
   }
 };
-
 export default {
   getAllProjects,
   createProject,
