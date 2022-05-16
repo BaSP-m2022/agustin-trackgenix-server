@@ -1,7 +1,9 @@
+//      Mongoose     //
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+//      Employee Schema     //
 const employeeSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -13,7 +15,7 @@ const employeeSchema = new Schema(
     city: { type: String, required: true },
     zip: { type: Number, required: true },
     status: { type: Boolean, required: true },
-    rol: { type: String, required: true },
+    role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
     projects: [
       {
         name: { type: String, required: true },
@@ -25,4 +27,5 @@ const employeeSchema = new Schema(
   { timestamps: true },
 );
 
+//      Export     //
 export default mongoose.model('Employee', employeeSchema);

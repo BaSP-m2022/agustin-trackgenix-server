@@ -1,96 +1,74 @@
+//      Variable Employees     //
 const Employees = require('../models/Employees');
 
+//      Get list of Employees     //
 const listEmployees = (req, res) => {
   Employees.find(req.query)
-    .then((employee) => res.status(200).json(employee))
-    .catch((error) => res.status(400).json({ message: error }));
+    .then((employee) => res.status(200).json({
+      message: 'Employees listed successfully',
+      data: employee,
+      error: false,
+    }))
+    .catch((error) => res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    }));
 };
 
-const findEmployeeById = (req, res) => {
-  Employees.findById(req.params.id, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employee with that ID does not exist' });
+//      Get Employees by ID     //
+const getById = async (req, res) => {
+  try {
+    const result = await Employees.findById(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
     }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return (employee) => res.status(200).json(employee);
-  });
+    return res.status(200).json({
+      message: 'success',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
-const deleteEmployee = (req, res) => {
-  Employees.findByIdAndDelete(req.params.id, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employee with that ID does not exist' });
+//      Delete Employees     //
+const deleteEmployee = async (req, res) => {
+  try {
+    const result = await Employees.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
     }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return res.status(204).send();
-  });
+    return res.status(200).json({
+      message: 'Employee deleted successfully',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
-const findEmployeeByRol = (req, res) => {
-  Employees.findOne(req.params.rol, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employee with that Rol does not exist' });
-    }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return (employee) => res.status(200).json(employee);
-  });
-};
-
-const findEmployeesByStatus = (req, res) => {
-  Employees.find(req.params.status, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employees with that Status do not exist' });
-    }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return (employee) => res.status(200).json(employee);
-  });
-};
-
-const findEmployeesByProject = (req, res) => {
-  Employees.find(req.params.project, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employees with that Project do not exist' });
-    }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return (employee) => res.status(200).json(employee);
-  });
-};
-
-const createEmployee = (req, res) => {
-  const employee = new Employees({
-    name: req.body.name,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    dni: req.body.dni,
-    address: req.body.address,
-    city: req.body.city,
-    zip: req.body.zip,
-    status: true,
-    rol: req.body.rol,
-    projects: req.body.projects,
-  });
-
-  employee.save((error, newEmployee) => {
-    if (error) {
-      return res.status(400).json({ message: error });
-    }
-    return res.status(201).json(newEmployee);
-  });
-};
-
-const editEmployee = (req, res) => {
-  Employees.findByIdAndUpdate(req.params.id, () => {
+//      Create Employees     //
+const createEmployee = async (req, res) => {
+  try {
     const employee = new Employees({
       name: req.body.name,
       lastName: req.body.lastName,
@@ -102,32 +80,60 @@ const editEmployee = (req, res) => {
       zip: req.body.zip,
       status: true,
       rol: req.body.rol,
-      projects: req.body.projects,
+      project: {
+        name: req.body.project.name,
+        description: req.body.project.description,
+      },
     });
-
-    employee.save((error, newEmployee) => {
-      if (error) {
-        return res.status(400).json({ message: error });
-      }
-      return res.status(201).json(newEmployee);
+    const result = await employee.save();
+    return res.status(201).json({
+      message: 'Employee created successfully',
+      data: result,
+      error: false,
     });
-  }, (error, chosenEmployee) => {
-    if (!chosenEmployee) {
-      return res.status(404).json({ message: 'Employee with that ID does not exist' });
-    }
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return (employee) => res.status(200).json(employee);
-  });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
+
+//      Update Employees     //
+const updateEmployee = async (req, res) => {
+  try {
+    const result = await Employees.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Employee updated successfully',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
+    });
+  }
+};
+
+//      Exports     //
 module.exports = {
   listEmployees,
-  findEmployeeById,
+  getById,
   deleteEmployee,
-  findEmployeeByRol,
-  findEmployeesByStatus,
-  findEmployeesByProject,
   createEmployee,
-  editEmployee,
+  updateEmployee,
 };

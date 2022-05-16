@@ -1,6 +1,17 @@
-const express = require('express');
+//      Imports     //
+import express from 'express';
+import employeeController from '../controllers/time-sheets';
+import employeeValidation from '../validations/time-sheets';
 
 const router = express.Router();
-const employees = require('../controllers/employees');
 
-router.use('employees', employees);
+//      Employee Routers     //
+router
+  .get('/', employeeController.listEmployees)
+  .get('/:id', employeeController.getById)
+  .post('/', employeeValidation.validateCreate, employeeController.createEmployee)
+  .delete('/:id', employeeController.deleteEmployee)
+  .put('/:id', employeeValidation.validateUpdate, employeeController.updateEmployee);
+
+//      Export     //
+export default router;
