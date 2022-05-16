@@ -86,7 +86,7 @@ const deleteTimesheet = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
+    return res.status(204).json({
       message: 'The time-sheet deleted successfully',
       data: result,
       error: false,
