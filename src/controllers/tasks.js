@@ -1,4 +1,4 @@
-const Tasks = require('../models/Tasks');
+import Tasks from '../models/Tasks';
 
 const createTask = (req, res) => {
   const task = new Tasks({
@@ -60,18 +60,7 @@ const readTaskById = (req, res) => {
 };
 
 const updateTask = (req, res) => {
-  if (!req.params.id) {
-    return res.status(400).json({
-      message: 'ID is required',
-      data: undefined,
-      error: true,
-    });
-  }
-  const task = new Tasks({
-    name: req.body.name,
-    details: req.body.details,
-  });
-  Tasks.findByIdAndUpdate(req.params.id, task, (error, newTask) => {
+  Tasks.findByIdAndUpdate(req.params.id, req.body, (error, newTask) => {
     if (error) {
       return res.status(400).json({
         message: error,
@@ -79,16 +68,11 @@ const updateTask = (req, res) => {
         error: true,
       });
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Success',
       data: newTask,
       error: false,
     });
-  });
-  return res.status(400).json({
-    message: 'An error has ocurred',
-    data: undefined,
-    error: true,
   });
 };
 
@@ -116,7 +100,7 @@ const deleteTask = (req, res) => {
   });
 };
 
-module.exports = {
+export default {
   createTask,
   readTask,
   readTaskById,

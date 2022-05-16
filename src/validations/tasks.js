@@ -1,9 +1,9 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const validateTaskCreationAndModify = (req, res, next) => {
   const taskValidation = Joi.object({
     name: Joi.string().min(1).max(20).required(),
-    details: Joi.string().min(20).max(50).required(),
+    details: Joi.string().min(5).max(50).required(),
   });
   const validation = taskValidation.validate(req.body);
   if (validation.error) {
