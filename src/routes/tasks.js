@@ -8,7 +8,7 @@ router
   .get('/', tasksController.readTask)
   .get('/:id', tasksController.readTaskById)
   .post('/', tasksValidation.validateTaskCreationAndModify, tasksController.createTask)
-  .put('/:id', tasksController.updateTask)
+  .put('/:id', tasksValidation.validateTaskCreationAndModify, tasksController.updateTask)
   .delete('/:id', tasksController.deleteTask);
 
 export default router;
