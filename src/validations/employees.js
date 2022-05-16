@@ -12,7 +12,7 @@ const validateCreate = (req, res, next) => {
     name: Joi.string().required().min(3),
     lastName: Joi.string().required().min(3),
     email: Joi.string().email().lowercase().required(),
-    password: Joi.string().password().required().min(6),
+    password: Joi.string().required().min(6),
     dni: Joi.number().required().min(7).max(8),
     address: Joi.string().alphanum().required().min(3),
     city: Joi.string().required().min(3),
@@ -40,16 +40,16 @@ const validateUpdate = (req, res, next) => {
   });
 
   const employeeValidation = Joi.object({
-    name: Joi.string().required().min(3),
-    lastName: Joi.string().required().min(3),
-    email: Joi.string().email().lowercase().required(),
-    password: Joi.string().password().required().min(6),
-    dni: Joi.number().required().min(7).max(8),
-    address: Joi.string().alphanum().required().min(3),
-    city: Joi.string().required().min(3),
-    zip: Joi.number().required().min(4).max(4),
-    status: Joi.boolean().required(),
-    role: Joi.string().required,
+    name: Joi.string().optional().min(3),
+    lastName: Joi.string().optional().min(3),
+    email: Joi.string().email().lowercase().optional(),
+    password: Joi.string().optional().min(6),
+    dni: Joi.number().optional().min(7).max(8),
+    address: Joi.string().alphanum().optional().min(3),
+    city: Joi.string().optional().min(3),
+    zip: Joi.number().optional().min(4).max(4),
+    status: Joi.boolean().optional(),
+    role: Joi.string().optional(),
     project: projectSchema,
   });
 

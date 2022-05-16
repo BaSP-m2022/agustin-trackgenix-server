@@ -1,5 +1,5 @@
 //      Mongoose     //
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -16,11 +16,10 @@ const employeeSchema = new Schema(
     zip: { type: Number, required: true },
     status: { type: Boolean, required: true },
     role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
-    projects: [
+    project: [
       {
         name: { type: String, required: true },
         description: { type: String, required: true },
-        status: { type: Boolean, required: true },
       },
     ],
   },
@@ -28,4 +27,4 @@ const employeeSchema = new Schema(
 );
 
 //      Export     //
-export default mongoose.model('Employee', employeeSchema);
+export default mongoose.model('employee', employeeSchema);

@@ -1,7 +1,7 @@
 //      Imports     //
 import express from 'express';
-import employeeController from '../controllers/time-sheets';
-import employeeValidation from '../validations/time-sheets';
+import employeeController from '../controllers/employees';
+import employeeValidation from '../validations/employees';
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .get('/', employeeController.listEmployees)
   .get('/:id', employeeController.getById)
-  .post('/', employeeValidation.validateCreate, employeeController.createEmployee)
+  .post('/', employeeController.createEmployee)
   .delete('/:id', employeeController.deleteEmployee)
   .put('/:id', employeeValidation.validateUpdate, employeeController.updateEmployee);
 

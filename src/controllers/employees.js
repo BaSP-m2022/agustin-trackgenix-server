@@ -1,5 +1,5 @@
 //      Variable Employees     //
-const Employees = require('../models/Employees');
+import Employees from '../models/Employees';
 
 //      Get list of Employees     //
 const listEmployees = (req, res) => {
@@ -68,6 +68,7 @@ const deleteEmployee = async (req, res) => {
 
 //      Create Employees     //
 const createEmployee = async (req, res) => {
+  const { project } = req.body;
   try {
     const employee = new Employees({
       name: req.body.name,
@@ -79,11 +80,8 @@ const createEmployee = async (req, res) => {
       city: req.body.city,
       zip: req.body.zip,
       status: true,
-      rol: req.body.rol,
-      project: {
-        name: req.body.project.name,
-        description: req.body.project.description,
-      },
+      role: req.body.role,
+      project,
     });
     const result = await employee.save();
     return res.status(201).json({
@@ -130,7 +128,7 @@ const updateEmployee = async (req, res) => {
 };
 
 //      Exports     //
-module.exports = {
+export default {
   listEmployees,
   getById,
   deleteEmployee,
