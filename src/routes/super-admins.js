@@ -1,14 +1,17 @@
 import express from 'express';
-import superAdminsController from '../controllers/super-admins';
-/* import superAdminsValidation from '../validations/super-admins'; */
+import superAdminController from '../controllers/super-admins';
+import superAdminValidation from '../validations/super-admins';
 
 const router = express.Router();
 
 router
-  .get('/', superAdminsController.getAllSuperAdmins);
-/*   .get('/', superAdminsController.getSuperAdminById)
-  .post('/', superAdminsValidation.superAdminValidation, superAdminsController.createSuperAdmin)
-  .put('/:id', superAdminsValidation.superAdminValidation, superAdminsController.updateSuperAdmin)
-  .delete('/:id', superAdminsController.deleteSuperAdmin); */
+  .get('/', superAdminController.getSuperAdmins)
+  .get('/', superAdminController.getSuperAdminById)
+  .post('/', superAdminValidation.createValidation, superAdminController.createSuperAdmin);
+
+/*   .put('/:id', superAdminValidation.superAdminValidation,
+superAdminController.updateSuperAdmin) */
+
+/*   .delete('/:id', superAdminController.deleteSuperAdmin); */
 
 export default router;
