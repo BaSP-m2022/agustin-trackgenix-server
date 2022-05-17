@@ -1,7 +1,5 @@
-//      Variable Employees     //
 import Employees from '../models/Employees';
 
-//      Get list of Employees     //
 const listEmployees = (req, res) => {
   Employees.find(req.query)
     .then((employee) => res.status(200).json({
@@ -16,7 +14,6 @@ const listEmployees = (req, res) => {
     }));
 };
 
-//      Get Employees by ID     //
 const getById = async (req, res) => {
   try {
     const result = await Employees.findById(req.params.id);
@@ -41,7 +38,6 @@ const getById = async (req, res) => {
   }
 };
 
-//      Delete Employees     //
 const deleteEmployee = async (req, res) => {
   try {
     const result = await Employees.findByIdAndDelete(req.params.id);
@@ -66,7 +62,6 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
-//      Create Employees     //
 const createEmployee = async (req, res) => {
   const { project } = req.body;
   try {
@@ -98,7 +93,6 @@ const createEmployee = async (req, res) => {
   }
 };
 
-//      Update Employees     //
 const updateEmployee = async (req, res) => {
   try {
     const result = await Employees.findByIdAndUpdate(
@@ -127,7 +121,6 @@ const updateEmployee = async (req, res) => {
   }
 };
 
-//      Exports     //
 export default {
   listEmployees,
   getById,
