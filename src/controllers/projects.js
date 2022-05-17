@@ -56,7 +56,7 @@ const getProjectById = async (req, res) => {
       const project = await Projects.findById(req.params.id);
       if (!project) {
         return res.status(404).json({
-          message: `Project with id: ${req.params.id} has not beenfound`,
+          message: `Project with id: ${req.params.id} has not been found`,
           data: undefined,
           error: true,
         });
@@ -97,7 +97,7 @@ const updateProject = async (req, res) => {
         });
       }
       return res.status(200).json({
-        message: 'The project updated successfully',
+        message: 'The project was successfully updated',
         data: result,
         error: false,
       });
@@ -128,7 +128,7 @@ const deleteProject = async (req, res) => {
         });
       }
       return res.status(200).json({
-        message: 'The project deleted successfully',
+        message: 'The project was successfully deleted',
         data: result,
         error: false,
       });
