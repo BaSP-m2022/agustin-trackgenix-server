@@ -1,6 +1,5 @@
 import TimeSheets from '../models/Time-Sheets';
 
-// -------------list
 const listTimesheets = (req, res) => {
   TimeSheets.find(req.query)
     .then((timesheet) => res.status(200).json({
@@ -15,7 +14,6 @@ const listTimesheets = (req, res) => {
     }));
 };
 
-// -------------Get by ID
 const getById = async (req, res) => {
   try {
     const result = await TimeSheets.findById(req.params.id);
@@ -40,7 +38,6 @@ const getById = async (req, res) => {
   }
 };
 
-// -------------create
 const createTimesheet = async (req, res) => {
   try {
     const timesheet = new TimeSheets({
@@ -75,7 +72,6 @@ const createTimesheet = async (req, res) => {
   }
 };
 
-// -------------delete
 const deleteTimesheet = async (req, res) => {
   try {
     const result = await TimeSheets.findByIdAndDelete(req.params.id);
@@ -100,7 +96,6 @@ const deleteTimesheet = async (req, res) => {
   }
 };
 
-// -------------update
 const updateTimesheet = async (req, res) => {
   try {
     const result = await TimeSheets.findByIdAndUpdate(
