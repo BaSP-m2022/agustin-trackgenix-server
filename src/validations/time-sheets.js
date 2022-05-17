@@ -32,7 +32,8 @@ const validateCreate = (req, res, next) => {
   if (validate.error) {
     return res.status(400).json({
       msg: 'There was an error',
-      error: validate.error.details[0].message,
+      data: validate.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -70,7 +71,8 @@ const validateUpdate = (req, res, next) => {
   if (validate.error) {
     return res.status(400).json({
       msg: 'There was an error',
-      error: validate.error.details[0].message,
+      data: validate.error.details[0].message,
+      error: true,
     });
   }
   return next();
