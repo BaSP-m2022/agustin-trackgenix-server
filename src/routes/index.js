@@ -1,8 +1,8 @@
 import express from 'express';
-import projectsRoutes from './projects';
+import projectRoutes from './projects';
 
 const router = express.Router();
 
-router.use('/projects', projectsRoutes);
+router.use('/projects', projectRoutes);
 
 export default router;

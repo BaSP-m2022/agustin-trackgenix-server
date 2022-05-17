@@ -17,11 +17,12 @@ const projectSchema = new Schema(
         role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
       },
     ],
-    rates: {
-      dev: { type: Number, required: true },
-      pm: { type: Number, required: true },
-      qa: { type: Number, required: true },
-    },
+    rates:
+      {
+        dev: { type: Number, required: true },
+        pm: { type: Number, required: true },
+        qa: { type: Number, required: true },
+      },
   },
   { timestamps: true },
 );

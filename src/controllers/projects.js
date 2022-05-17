@@ -23,7 +23,6 @@ const getAllProjects = async (req, res) => {
     });
   }
 };
-
 const createProject = (req, res) => {
   const project = new Projects({
     name: req.body.name,
@@ -147,7 +146,6 @@ const deleteProject = async (req, res) => {
     });
   }
 };
-
 export default {
   getAllProjects,
   createProject,
