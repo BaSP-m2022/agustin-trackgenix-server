@@ -28,6 +28,40 @@ const validateCreate = (req, res, next) => {
   }
   return next();
 };
+const validateUpdate = (req, res, next) => {
+  const employeeSchema = Joi.object({
+    name: Joi.string().min(4).max(50).optional(),
+    lastName: Joi.string().min(4).max(50).optional(),
+    role: Joi.string().valid('DEV', 'QA', 'PM').optional(),
+  });
+
+  const ratesSchema = Joi.object({
+    dev: Joi.number().optional(),
+    pm: Joi.number().optional(),
+    qa: Joi.number().optional(),
+  });
+
+  const projectValidation = Joi.object({
+    name: Joi.string().min(4).max(50).optional(),
+    description: Joi.string().optional(),
+    status: Joi.string().optional(),
+    client: Joi.string().optional(),
+    employees: Joi.array().items(employeeSchema).allow(null),
+    rates: ratesSchema.optional(),
+  });
+
+  const validation = projectValidation.validate(req.body);
+
+  if (validation.error) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      error: validation.error.details[0].message,
+    });
+  }
+
+  return next();
+};
 export default {
   validateCreate,
+  validateUpdate,
 };
