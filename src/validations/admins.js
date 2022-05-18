@@ -12,7 +12,8 @@ const validateCreate = (req, res, next) => {
   if (validations.error) {
     return res.status(400).json({
       msg: 'There was an error',
-      error: validations.error.details[0].message,
+      data: validations.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -23,14 +24,15 @@ const validateUpdate = (req, res, next) => {
     name: Joi.string().min(3).optional(),
     lastName: Joi.string().min(3).optional(),
     email: Joi.string().email().lowercase().optional(),
-    password: Joi.string().alphanum().min(8).optional(),
+    password: Joi.string().alphanum().min(6).optional(),
     status: Joi.boolean().optional(),
   });
   const validations = authSchema.validate(req.body);
   if (validations.error) {
     return res.status(400).json({
       msg: 'There was an error',
-      error: validations.error.details[0].message,
+      data: validations.error.details[0].message,
+      error: true,
     });
   }
   return next();
