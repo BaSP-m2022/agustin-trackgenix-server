@@ -19,7 +19,7 @@ const getSuperAdmins = async (req, res) => {
       });
     }
     if (allSuperAdmins.length >= 1 && Object.keys(req.query).length > 0) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: `The Super Admin/s matching the query "${JSON.stringify(req.query)}" from the
           Super Admin registry currently in the database is/are:`,
         data: allSuperAdmins,
