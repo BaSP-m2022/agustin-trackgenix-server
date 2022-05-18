@@ -97,10 +97,32 @@ const createSuperAdmin = async (req, res) => {
   }
 };
 
+const updateSuperAdmin = async (req, res) => {
+  try {
+    const updated = await SuperAdmins.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    return res.status(200).json({
+      message: 'Super Admin succesfully updated!',
+      data: updated,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'An error ocurred during updating resource:',
+      data: error.message,
+      error: true,
+    });
+  }
+};
+
 export default {
   getSuperAdmins,
   getSuperAdminById,
   createSuperAdmin,
+  updateSuperAdmin,
 };
 
 // DELETE THIS AFTER MONGOOSE IS IMPLEMENTED

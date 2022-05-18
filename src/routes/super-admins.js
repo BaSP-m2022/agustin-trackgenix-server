@@ -6,11 +6,9 @@ const router = express.Router();
 
 router
   .get('/', superAdminController.getSuperAdmins)
-  .get('/', superAdminController.getSuperAdminById)
-  .post('/', superAdminValidation.createValidation, superAdminController.createSuperAdmin);
-
-/*   .put('/:id', superAdminValidation.superAdminValidation,
-superAdminController.updateSuperAdmin) */
+  .get('/:id', superAdminController.getSuperAdminById)
+  .post('/', superAdminValidation.createValidation, superAdminController.createSuperAdmin)
+  .put('/:id', superAdminValidation.updateValidation, superAdminController.updateSuperAdmin);
 
 /*   .delete('/:id', superAdminController.deleteSuperAdmin); */
 
