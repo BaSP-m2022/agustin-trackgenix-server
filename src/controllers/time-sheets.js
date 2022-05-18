@@ -1,96 +1,133 @@
-const express = require('express');
-const fileSystem = require('fs');
+import TimeSheets from '../models/Time-Sheets';
 
-// DELETE THIS AFTER MONGOOSE IS IMPLEMENTED
-const timeSheets = [];
+const listTimesheets = (req, res) => {
+  TimeSheets.find(req.query)
+    .then((timesheet) => res.status(200).json({
+      message: 'The time-sheet listed successfully',
+      data: timesheet,
+      error: false,
+    }))
+    .catch((error) => res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    }));
+};
 
-const router = express.Router();
-// -------------Get methods
-router.get('/getAll', (req, res) => {
-  res.send(timeSheets);
-});
-router.get('/getById/:id', (req, res) => {
-  const timeSheetsId = req.params.id;
-  const timeSheet = timeSheets.find((ts) => ts.id === timeSheetsId);
-  if (timeSheet) {
-    res.send(timeSheet);
-  } else {
-    res.send('Get error: Timesheet not found');
-  }
-});
-// -------------Filter method
-router.get('/getByDate', (req, res) => {
-  const timeSheetsDate = req.query.date;
-  const filteredTimesheet = timeSheets.filter((ts) => ts.date === timeSheetsDate);
-  if (filteredTimesheet.length > 0) {
-    res.send(filteredTimesheet);
-  } else {
-    res.send(`The requested timesheet "${timeSheetsDate}" does not exist`);
-  }
-});
-// -------------Post method
-router.post('/add', (req, res) => {
-  const timeSheetData = req.body;
-  if (timeSheetData.id && timeSheetData.proyectId && timeSheetData.employeeId
-    && timeSheetData.date && timeSheetData.startTime && timeSheetData.endTime
-    && timeSheetData.regularHours && timeSheetData.overtimeHours && timeSheetData.task) {
-    timeSheets.push(timeSheetData);
-    fileSystem.writeFile('src/data/time-sheets.json', JSON.stringify(timeSheets), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(`Timesheet registered\n ${JSON.stringify(timeSheetData)}`);
-      }
+const getById = async (req, res) => {
+  try {
+    const result = await TimeSheets.findById(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'success',
+      data: result,
+      error: false,
     });
-  } else {
-    res.send('Post error: data incomplete');
-  }
-});
-// -------------Delete method
-router.delete('/deleteById/:id', (req, res) => {
-  const timeSheetsId = req.params.id;
-  const filteredTimesheet = timeSheets.filter((ts) => ts.id !== timeSheetsId);
-  if (timeSheets.length === filteredTimesheet.length) {
-    res.send('Delete error: Timesheet not found');
-  } else {
-    fileSystem.writeFile('src/data/time-sheets.json', JSON.stringify(filteredTimesheet), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Timesheet deleted');
-      }
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
     });
   }
-});
-// -------------Put method
-router.put('/putById/:id', (req, res) => {
-  const timeSheetsId = req.params.id;
-  const {
-    proyectId, employeeId, date, startTime, endTime, regularHours, overtimeHours, task,
-  } = req.body;
-  const updatedTimesheet = {
-    id: timeSheetsId,
-    proyectId: proyectId || '',
-    employeeId: employeeId || '',
-    date: date || '',
-    startTime: startTime || '',
-    endTime: endTime || '',
-    regularHours: regularHours || '',
-    overtimeHours: overtimeHours || '',
-    task: task || '',
-  };
-  const timeSheetIndex = timeSheets.findIndex((ts) => ts.id === timeSheetsId);
-  if (timeSheetIndex !== -1) {
-    timeSheets[timeSheetIndex] = updatedTimesheet;
-    fileSystem.writeFile('src/data/time-sheets.json', JSON.stringify(timeSheets), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(`Timesheet modified\n ${JSON.stringify(updatedTimesheet)}`);
-      }
+};
+
+const createTimesheet = async (req, res) => {
+  try {
+    const timesheet = new TimeSheets({
+      date: req.body.date,
+      regularHours: req.body.regularHours,
+      overtimeHours: req.body.overtimeHours,
+      startTime: req.body.startTime,
+      endTime: req.body.endTime,
+      task: req.body.task,
+      employee: {
+        name: req.body.employee.name,
+        lastName: req.body.employee.lastName,
+        role: req.body.employee.role,
+      },
+      project: {
+        name: req.body.project.name,
+        description: req.body.project.description,
+      },
     });
-  } else {
-    res.send('Modify error: Timesheet not found');
+    const result = await timesheet.save();
+    return res.status(201).json({
+      message: 'The time-sheet created successfully',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
-});
-module.exports = router;
+};
+
+const deleteTimesheet = async (req, res) => {
+  try {
+    const result = await TimeSheets.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(204).json({
+      message: 'The time-sheet deleted successfully',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const updateTimesheet = async (req, res) => {
+  try {
+    const result = await TimeSheets.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: `Id ${req.params.id} does not exist`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'The time-sheet updated successfully',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'An error ocurred',
+      data: error.message,
+      error: true,
+    });
+  }
+};
+
+export default {
+  listTimesheets,
+  getById,
+  createTimesheet,
+  deleteTimesheet,
+  updateTimesheet,
+};
