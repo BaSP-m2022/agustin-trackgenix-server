@@ -1,0 +1,882 @@
+{
+	"info": {
+		"_postman_id": "41d03098-4b34-4c3e-96de-d4c0ec6622d0",
+		"name": "Trackgenix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/admins",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/admins/6282a72e4fc3cd510123ee34",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins",
+								"6282a72e4fc3cd510123ee34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dexter\",\n  \"lastName\": \"Phair\",\n  \"email\": \"dphaire@wiley.com\",\n  \"password\": \"BBnlpQnOR8\",\n  \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/admins/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"g0RD0T4P10C4\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/admins/6283d9d3ec76a8914e5f7b25",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins",
+								"6283d9d3ec76a8914e5f7b25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/admins/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/admins?name=pablo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admins"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "pablo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/employees",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/employees/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test\",\n    \"lastName\" : \"testt\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"123455\",\n    \"dni\" : \"56781234\",\n    \"address\" : \"direccion\",\n    \"city\" : \"ciudad\",\n    \"zip\" : \"2000\",\n    \"status\" : true,\n    \"role\" : \"QA\",\n    \"project\": \n        {\n        \"name\": \"testing\",\n        \"description\": \"iufbusabfuwebfu\"\n    }\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/employees/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"probando\",\r\n    \"lastName\" : \"pruebas\",\r\n    \"email\": \"prueba@gmail.com\",\r\n    \"password\": \"6789101112\",\r\n    \"dni\" : \"45678123\",\r\n    \"address\" : \"localizacion\",\r\n    \"city\" : \"ciudadela\",\r\n    \"zip\" : \"2201\",\r\n    \"status\" : true,\r\n    \"role\" : \"DEV\",\r\n    \"project\": \r\n        {\r\n        \"name\": \"testin\",\r\n        \"description\": \"abcdefghjklmnop\"\r\n    }\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/employees/62825d7e7d4a768682a7a5a0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees",
+								"62825d7e7d4a768682a7a5a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/employees/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/employees?role=Project%Manager",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employees"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "Project%Manager"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/62813e3ab1009b9a83967a1c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"62813e3ab1009b9a83967a1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Andalax\",\r\n  \"description\": \"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\",\r\n  \"status\": \"true\",\r\n  \"client\": \"Cole Lydon\",\r\n  \"employees\": [\r\n\r\n  ],\r\n  \"rates\": {\r\n    \"dev\": 83,\r\n    \"qa\": 31,\r\n    \"pm\": 97\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"changed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/62814b15f6c82442b659a1b2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"62814b15f6c82442b659a1b2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/62816759f95e14d4184732ca",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"62816759f95e14d4184732ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/?name=mercado%libre",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mercado%libre"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SuperAdmin",
+			"item": [
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/super-admins",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/super-admins/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Remove\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"test.remove@gmail.com\",\r\n    \"password\": \"00000000\",\r\n    \"status\": \"true\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/super-admins",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstNam\": \"Tested\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/super-admins/6283effdfcd4fe8e83f960c1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins",
+								"6283effdfcd4fe8e83f960c1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/super-admins/62843cbd01d06d19ac9a98a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins",
+								"62843cbd01d06d19ac9a98a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/super-admins?lastName=Skywalker",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"super-admins"
+							],
+							"query": [
+								{
+									"key": "lastName",
+									"value": "Skywalker"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tasks/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tasks/15",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"add hours\",\r\n    \"details\": \"complete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/tasks",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"changed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/tasks/16",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks",
+								"16"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tasks/16",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tasks?name=task1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "task1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TimeSheet",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/time-sheets",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/time-sheets?id=3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"02/05/2021\",\r\n    \"regularHours\": 1,\r\n    \"overtimeHours\": 6,\r\n    \"startTime\": 10,\r\n    \"endTime\": 11,\r\n    \"task\": \"CREATE VALIDATIONS\",\r\n    \"employee\": \r\n    {\r\n        \"name\": \"Junan\",\r\n        \"lastName\": \"Perez\",\r\n        \"role\": \"DEV\"\r\n    },\r\n    \"project\": \r\n    {\r\n    \"name\": \"Trackgenix\",\r\n    \"description\": \"control EMPLOYEE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/time-sheets",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"employee\": \r\n    {\r\n        \"name\": \"Pedro\",\r\n        \"lastName\": \"Rodriguez\",\r\n        \"role\": \"PM\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/time-sheets/62817e54ba9843827a61371c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets",
+								"62817e54ba9843827a61371c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/time-sheets/628168fc368fbd452279af85",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets",
+								"628168fc368fbd452279af85"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/time-sheets?task=create%validations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"time-sheets"
+							],
+							"query": [
+								{
+									"key": "task",
+									"value": "create%validations"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000/api",
+			"type": "string"
+		}
+	]
+}
