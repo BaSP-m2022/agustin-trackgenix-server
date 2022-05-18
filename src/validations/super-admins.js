@@ -1,13 +1,5 @@
 import Joi from 'joi';
 
-/* const superAdminJoiSchema = Joi.object({
-  firstName: Joi.string().min(3).required(),
-  lastName: Joi.string().min(3).required(),
-  email: Joi.string().email().lowercase().required(),
-  password: Joi.string().alphanum().min(8).required(),
-  status: Joi.boolean().required(),
-}); */
-
 const createValidation = (req, res, next) => {
   const superAdminJoiSchema = Joi.object({
     firstName: Joi.string().min(3).required(),

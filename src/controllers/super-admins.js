@@ -42,27 +42,20 @@ const getSuperAdmins = async (req, res) => {
 
 const getSuperAdminById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const superAdmin = await SuperAdmins.findById(req.params.id);
-      if (!superAdmin) {
-        return res.status(404).json({
-          message: `There is not any Super Admin matching the id "${JSON.stringify(req.params.id)}"
+    const superAdmin = await SuperAdmins.findById(req.params.id);
+    if (!superAdmin) {
+      return res.status(404).json({
+        message: `There is not any Super Admin matching the id "${JSON.stringify(req.params.id)}"
             from the Super Admin registry currently in the database.`,
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: `The Super Admin matching the id "${JSON.stringify(req.params.id)}" from the
-            Super Admin registry currently in the database is:`,
-        data: superAdmin,
-        error: false,
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(400).json({
-      message: 'Error: An id parameter must be provided.',
-      data: undefined,
-      error: true,
+    return res.status(200).json({
+      message: `The Super Admin matching the id "${JSON.stringify(req.params.id)}" from the
+            Super Admin registry currently in the database is:`,
+      data: superAdmin,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
