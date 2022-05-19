@@ -22,8 +22,9 @@ const validateCreate = (req, res, next) => {
   const validation = projectValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error',
-      error: validation.error.details[0].message,
+      msg: 'There was an error with the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -34,13 +35,11 @@ const validateUpdate = (req, res, next) => {
     lastName: Joi.string().min(4).max(50).optional(),
     role: Joi.string().valid('DEV', 'QA', 'PM').optional(),
   });
-
   const ratesSchema = Joi.object({
     dev: Joi.number().optional(),
     pm: Joi.number().optional(),
     qa: Joi.number().optional(),
   });
-
   const projectValidation = Joi.object({
     name: Joi.string().min(4).max(50).optional(),
     description: Joi.string().optional(),
@@ -49,16 +48,14 @@ const validateUpdate = (req, res, next) => {
     employees: Joi.array().items(employeeSchema).allow(null),
     rates: ratesSchema.optional(),
   });
-
   const validation = projectValidation.validate(req.body);
-
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error',
-      error: validation.error.details[0].message,
+      msg: 'There was an error with the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
-
   return next();
 };
 export default {
