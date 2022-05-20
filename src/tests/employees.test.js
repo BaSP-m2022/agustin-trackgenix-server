@@ -11,16 +11,25 @@ let employeeId;
 
 describe('Test Employees routes', () => {
   test('It should create a new employee', async () => {
-    const response = await request(app).post('/employees/create').send({
-      first_name: 'Esteban',
-      last_name: 'Frare',
+    const response = await request(app).post('api/employees').send({
+      name: 'Esteban',
+      lastName: 'Frare',
       email: 'esteban.frare@radiumrocket.com',
       password: 'test123',
       dni: '38240915',
       address: 'Paraguay 2349',
       city: 'Rosario',
       zip: '2000',
+      status: true,
+      role: 'DEV',
+      project: [
+        {
+          name: 'Test Project',
+          description: 'This is a test project',
+        },
+      ],
     });
+    console.log(response);
     expect(response.statusCode).toBe(201);
     expect(response.body.error).toBe(false);
     // eslint-disable-next-line no-underscore-dangle
@@ -28,13 +37,13 @@ describe('Test Employees routes', () => {
   });
 
   test('It should get the employee list', async () => {
-    const response = await request(app).get('/employees');
+    const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
     expect(response.body.error).toBe(false);
   });
 
   test('It should delete a employee', async () => {
-    const response = await request(app).delete(`/employees/${employeeId}`);
+    const response = await request(app).delete(`/${employeeId}`);
     expect(response.statusCode).toBe(200);
     expect(response.body.error).toBe(false);
   });
