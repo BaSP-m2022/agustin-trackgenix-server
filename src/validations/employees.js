@@ -21,7 +21,7 @@ const validateCreate = (req, res, next) => {
       .max(30),
     status: Joi.boolean().optional(),
     role: Joi.string().valid('DEV', 'QA', 'PM').required(),
-    project: projectSchema,
+    project: Joi.array().items(projectSchema),
   });
 
   const validate = employeeValidation.validate(req.body);
