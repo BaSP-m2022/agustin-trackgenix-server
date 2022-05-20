@@ -16,5 +16,4 @@ router.use('/time-sheets', timesheetRoutes);
 router.use('/super-admins', superAdminRoutes);
 router.use('/employees', employeeRoutes);
 
-
 export default router;
