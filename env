@@ -1,0 +1,2 @@
+PORT=4000
+DATABASE_URL='mongodb+srv://BaSD:BaSD2022@cluster0.tgw7u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
