@@ -1,22 +1,33 @@
 import TimeSheets from '../models/Time-Sheets';
 
-const listTimesheets = (req, res) => {
-  TimeSheets.find(req.query)
-    .then((timesheet) => res.status(200).json({
-      message: 'The time-sheet listed successfully',
-      data: timesheet,
+const listTimesheets = async (req, res) => {
+  try {
+    const data = await TimeSheets.find(req.query)
+      .populate('task')
+      .populate('employee')
+      .populate('project');
+
+    return res.status(200).json({
+      status: 'success',
+      data,
       error: false,
-    }))
-    .catch((error) => res.status(400).json({
+    });
+  } catch (error) {
+    return res.status(400).json({
       message: error.message,
       data: undefined,
       error: true,
-    }));
+    });
+  }
 };
 
 const getById = async (req, res) => {
   try {
-    const result = await TimeSheets.findById(req.params.id);
+    const result = await TimeSheets.findById(req.params.id)
+      .populate('task')
+      .populate('employee')
+      .populate('project');
+
     if (!result) {
       return res.status(404).json({
         message: `Id ${req.params.id} does not exist`,
