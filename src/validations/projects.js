@@ -11,7 +11,7 @@ const validateCreate = (req, res, next) => {
     description: Joi.string().required(),
     status: Joi.string().required(),
     client: Joi.string().required(),
-    employees: Joi.array().items(Joi.object().id()).allow(null),
+    employees: Joi.array().items(Joi.string().alphanum().length(24)).allow(null),
     rates: ratesSchema,
   });
   const validation = projectValidation.validate(req.body);
@@ -35,7 +35,7 @@ const validateUpdate = (req, res, next) => {
     description: Joi.string().optional(),
     status: Joi.string().optional(),
     client: Joi.string().optional(),
-    employees: Joi.array().items(Joi.object().id()).allow(null),
+    employees: Joi.array().items(Joi.string().alphanum().length(24)).allow(null),
     rates: ratesSchema.optional(),
   });
   const validation = projectValidation.validate(req.body);
