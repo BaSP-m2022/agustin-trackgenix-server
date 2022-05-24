@@ -12,9 +12,9 @@ const projectSchema = new Schema(
     // endDate: { type: Date, required: true },
     employees: [
       {
-        name: { type: String, required: true },
-        lastName: { type: String, required: true },
-        role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Employees',
       },
     ],
     rates:
