@@ -62,7 +62,7 @@ describe('GET BY ID /employees/:id', () => {
 
   test('With an nonexistent id the response should return a non empty message', async () => {
     const response = await request(app).get('/api/employees/62898d14882f8759987f5b50').send();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(response.body.message).toEqual('Id 62898d14882f8759987f5b50 does not exist');
   });
 
   test('With an correct id the response should return a status 200', async () => {
@@ -82,7 +82,7 @@ describe('GET BY ID /employees/:id', () => {
 
   test('With an correct id the response should return a non empty message', async () => {
     const response = await request(app).get('/api/employees/62898d14882f8759987f5a37').send();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(response.body.message).toEqual('success');
   });
 });
 
@@ -170,6 +170,26 @@ describe('POST /employees', () => {
     });
     expect(response.body.message).toEqual('Employee created successfully');
   });
+
+  test('name length min 3', async () => {
+    const response = await request(app).post('/api/employees').send({
+      name: 'Lucas',
+      lastName: 'Prat',
+      email: 'lucas@gmail.com',
+      password: '12345asd',
+      dni: 32862741,
+      address: 'Salvat',
+      city: 'Rosario',
+      zip: 2000,
+      status: true,
+      role: 'PM',
+      projects: [
+        { _id: '6282835e7161c78df5f6acab' },
+        { _id: '628283bb7161c78df5f6acb0' },
+      ],
+    });
+    expect(response.body.data.name.length).toBeGreaterThan(3);
+  });
 });
 
 // ----------DELETE----------
@@ -204,34 +224,8 @@ describe('DELETE /employees/:id', () => {
     expect(response.body.message.length).toBeGreaterThan(5);
   });
 
-  // cuando le pego con delete elimino la data que tengo
-  // por eso todos los siguientes request van a dar error
-  // delete deben ser los ultimos test
-  // para solucionar eso puse todos los expect en el mismo test
-
-  // el controller esta hecho para que devuelva status 200 en lugar de 204
-  // si el status fuera 204 no devolveria nada en error, data ni msg
-
-  test('With an correct id the response should return a status 200', async () => {
+  test('With an correct id the response should return a status 204', async () => {
     const response = await request(app).delete(`/api/employees/${idEmployeeCreated}`).send();
-    expect(response.status).toBe(200);
-    expect(response.body.error).toBe(false);
-    expect(response.body.data).not.toBeUndefined();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(response.status).toBe(204);
   });
-
-  // test('With an correct id the response should return a error false', async () => {
-  //   const response = await request(app).delete('/api/employees/62898d14882f8759987f5a37').send();
-  //   expect(response.body.error).toBe(false);
-  // });
-
-  // test('With an correct id the response should return a not undefined data', async () => {
-  //   const response = await request(app).delete('/api/employees/62898d14882f8759987f5a37').send();
-  //   expect(response.body.data).not.toBeUndefined();
-  // });
-
-  // test('With an correct id the response should return a non empty message', async () => {
-  //   const response = await request(app).delete('/api/employees/62898d14882f8759987f5a37').send();
-  //   expect(response.body.message.length).toBeGreaterThan(5);
-  // });
 });
