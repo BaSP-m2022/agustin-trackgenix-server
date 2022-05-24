@@ -8,8 +8,8 @@ export default [
     overtimeHours: '1',
     startTime: '900',
     endTime: '2300',
-    task: mongoose.Types.ObjectId('62824ff02de0708e369fc99c'),
-    employee: mongoose.Types.ObjectId('62898ab9c805478374c554bf'),
-    project: mongoose.Types.ObjectId('628283bb7161c78df5f6acb0'),
+    task: '62824ff02de0708e369fc99c',
+    employee: '62898d14882f8759987f5a37',
+    project: '628af068c5554a93f700e8be',
   },
 ];
