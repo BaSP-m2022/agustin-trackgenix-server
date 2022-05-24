@@ -102,8 +102,7 @@ describe('POST /employees', () => {
       status: true,
       role: 'PM',
       projects: [
-        { _id: '6282835e7161c78df5f6acab' },
-        { _id: '628283bb7161c78df5f6acb0' },
+        '628af068c5554a93f700e8be',
       ],
     });
     expect(response.status).toBe(201);
@@ -124,8 +123,7 @@ describe('POST /employees', () => {
       status: true,
       role: 'PM',
       projects: [
-        { _id: '6282835e7161c78df5f6acab' },
-        { _id: '628283bb7161c78df5f6acb0' },
+        '628af068c5554a93f700e8be',
       ],
     });
     expect(response.body.error).toBe(false);
@@ -144,8 +142,7 @@ describe('POST /employees', () => {
       status: true,
       role: 'PM',
       projects: [
-        { _id: '6282835e7161c78df5f6acab' },
-        { _id: '628283bb7161c78df5f6acb0' },
+        '628af068c5554a93f700e8be',
       ],
     });
     expect(response.body.data).not.toBeUndefined();
@@ -164,8 +161,7 @@ describe('POST /employees', () => {
       status: true,
       role: 'PM',
       projects: [
-        { _id: '6282835e7161c78df5f6acab' },
-        { _id: '628283bb7161c78df5f6acb0' },
+        '628af068c5554a93f700e8be',
       ],
     });
     expect(response.body.message).toEqual('Employee created successfully');
@@ -184,8 +180,7 @@ describe('POST /employees', () => {
       status: true,
       role: 'PM',
       projects: [
-        { _id: '6282835e7161c78df5f6acab' },
-        { _id: '628283bb7161c78df5f6acb0' },
+        '628af068c5554a93f700e8be',
       ],
     });
     expect(response.body.data.name.length).toBeGreaterThan(3);
