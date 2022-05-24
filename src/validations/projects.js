@@ -17,7 +17,7 @@ const validateCreate = (req, res, next) => {
   const validation = projectValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error with the validation',
+      message: 'There was an error with the validation',
       data: validation.error.details[0].message,
       error: true,
     });
@@ -41,7 +41,7 @@ const validateUpdate = (req, res, next) => {
   const validation = projectValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error with the validation',
+      message: 'There was an error with the validation',
       data: validation.error.details[0].message,
       error: true,
     });
