@@ -95,3 +95,114 @@ describe('Get super admin by id', () => {
     expect(response.message).not.toBeNull();
   });
 });
+
+describe('Create a super admin', () => {
+  test('A super admin should be created', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.status).toBe(201);
+  });
+
+  test('Response should return a false error', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.error).toBeFalsy();
+  });
+
+  test('The message should indicate the creation of a super admin', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.message).toEqual('A new Super Admin has been created!');
+  });
+
+  test('Response should return a 400 status', async () => {
+    const response = await request(app).post('/api/super-admins').send();
+    expect(response.status).toBe(400);
+  });
+
+  test('Response should return a true error', async () => {
+    const response = await request(app).post('/api/super-admins').send();
+    expect(response.error).toBeTruthy();
+  });
+
+  test('The message should indicate there was an error', async () => {
+    const response = await request(app).post('/api/super-admins').send();
+    expect(response.body.message).toEqual('There was an error during the request validation:');
+  });
+
+  test('Super admin should not be created without first name', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Super admin should not be created without last name', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Super admin should not be created without email', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Super admin should not be created without password', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      status: true,
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Super admin should not be created without status', async () => {
+    const response = await request(app).post('/api/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Wrong path should return a 404 status', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.status).toBe(404);
+  });
+});
