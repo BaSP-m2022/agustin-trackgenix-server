@@ -205,4 +205,254 @@ describe('Create a super admin', () => {
     });
     expect(response.status).toBe(404);
   });
+
+  test('First name should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.data.firstName.length).toBeGreaterThan(2);
+  });
+
+  test('Last name should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.data.lastName.length).toBeGreaterThan(2);
+  });
+
+  test('Email should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.data.email).toMatch(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/);
+  });
+
+  test('Password should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.data.password.length).toBeGreaterThan(8);
+  });
+
+  test('Super admin status should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: true,
+    });
+    expect(response.body.data.status).toBeTruthy();
+  });
+});
+
+describe('Update a super admin', () => {
+  test('If the name is updated, response should return a 200 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anaki',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('If the last name is updated, response should return a 200 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      lastName: 'Skywaker',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('If the email is updated, response should return a 200 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      email: 'chosenone@gmail.com',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('If the password is updated, response should return a 200 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      password: 'cyborg4liife',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('If the status is updated, response should return a 200 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      status: false,
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a false error', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anaki',
+    });
+    expect(response.error).toBeFalsy();
+  });
+
+  test('The message should indicate the creation of a super admin', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anaki',
+    });
+    expect(response.body.message).toEqual('Super Admin succesfully updated!');
+  });
+
+  test('Wrong path should return a 404 status', async () => {
+    const response = await request(app).put('/api/super-admins').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('If the first name is empty, response should return a 400 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the last name is empty, response should return a 400 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      lastName: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the email is empty, response should return a 400 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      email: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the password is empty, response should return a 400 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      password: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the status is empty, response should return a 400 status', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      status: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Response should return a true error', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      status: '',
+    });
+    expect(response.error).toBeTruthy();
+  });
+
+  test('Response should return an error message', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      status: '',
+    });
+    expect(response.body.message).not.toBeNull();
+  });
+
+  test('First name should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: false,
+    });
+    expect(response.body.data.firstName.length).toBeGreaterThan(2);
+  });
+
+  test('Last name should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: false,
+    });
+    expect(response.body.data.lastName.length).toBeGreaterThan(2);
+  });
+
+  test('Email should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: false,
+    });
+    expect(response.body.data.email).toMatch(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/);
+  });
+
+  test('Password should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: false,
+    });
+    expect(response.body.data.password.length).toBeGreaterThan(8);
+  });
+
+  test('Super admin status should be valid', async () => {
+    const response = await request(app).put('/api/super-admins/6283f334fcd4fe8e83f960d4').send({
+      firstName: 'Anakin',
+      lastName: 'Skywalker',
+      email: 'chosen.one@gmail.com',
+      password: 'cyborg4life',
+      status: false,
+    });
+    expect(response.body.data.status).toBeFalsy();
+  });
+});
+
+describe('Delete a super admin', () => {
+  test('Response shloud return a 204 status', async () => {
+    const response = await request(app).delete('/api/super-admins/6283f334fcd4fe8e83f960d4').send();
+    expect(response.status).toBe(204);
+  });
+
+  test('Response shloud return a 404 status', async () => {
+    const response = await request(app).delete('/api/super-admins/6283f334fcd4fe8e83f960d0').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('Message should indicate the id doesn´t exist', async () => {
+    const response = await request(app).delete('/api/super-admins/6283f334fcd4fe8e83f960d0').send();
+    expect(response.body.message).toEqual('There is no Super Admin with matching id: 6283f334fcd4fe8e83f960d0.');
+  });
+
+  test('Response shloud return a true error', async () => {
+    const response = await request(app).delete('/api/super-admins/6283f334fcd4fe8e83f960d4').send();
+    expect(response.error).toBeTruthy();
+  });
+
+  test('Response shloud return data undefined', async () => {
+    const response = await request(app).delete('/api/super-admins/6283f334fcd4fe8e83f960d4').send();
+    expect(response.data).toBeUndefined();
+  });
 });
