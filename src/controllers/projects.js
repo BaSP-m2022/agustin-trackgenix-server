@@ -16,7 +16,7 @@ const getAllProjects = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,
@@ -73,7 +73,7 @@ const getProjectById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,
@@ -108,7 +108,7 @@ const updateProject = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,
