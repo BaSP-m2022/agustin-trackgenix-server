@@ -1,10 +1,13 @@
 import request from 'supertest';
 import app from '../app';
 import Employees from '../models/Employees';
+import Project from '../models/Projects';
 import employeesSeed from '../seeds/employees';
+import projectsSeed from '../seeds/projects';
 
 beforeAll(async () => {
   await Employees.collection.insertMany(employeesSeed);
+  await Project.collection.insertMany(projectsSeed);
 });
 
 describe('GET /employees', () => {
@@ -23,14 +26,91 @@ describe('GET /employees', () => {
     expect(response.body.error).toBe(false);
   });
 
+  test('Response should return a correct message', async () => {
+    const response = await request(app).get('/api/employees').send();
+    expect(response.body.message).toEqual('Employees listed successfully');
+  });
+
   test('Response should return a non empty data', async () => {
     const response = await request(app).get('/api/employees').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
 
-  test('Response should return a non empty message', async () => {
+  test('Response should return 12 keys in data', async () => {
     const response = await request(app).get('/api/employees').send();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(Object.keys(response.body.data[0]).length).toEqual(12);
+  });
+
+  test('Response should return valid names', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.name.length).toBeGreaterThan(3);
+    });
+  });
+
+  test('Response should return valid lastName', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.lastName.length).toBeGreaterThan(3);
+    });
+  });
+
+  test('Response should return valid email', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.email.length).toBeGreaterThan(6);
+    });
+  });
+
+  test('Response should return valid password', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.password.length).toBeGreaterThan(6);
+    });
+  });
+
+  test('Response should return valid dni', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.dni).toBeGreaterThan(1000000);
+      expect(employee.dni).toBeLessThan(99999999);
+    });
+  });
+
+  test('Response should return valid address', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.address.length).toBeGreaterThan(3);
+    });
+  });
+
+  test('Response should return valid city', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.city.length).toBeGreaterThan(3);
+    });
+  });
+
+  test('Response should return valid zip', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(employee.zip).toBeGreaterThan(999);
+      expect(employee.zip).toBeLessThan(10000);
+    });
+  });
+
+  test('Response should return valid role', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(typeof employee.status === 'boolean').toBeTruthy();
+    });
+  });
+
+  test('Response should return valid projects', async () => {
+    const response = await request(app).get('/api/employees').send();
+    response.body.data.forEach((employee) => {
+      expect(Object.keys(employee.projects[0]).length).toEqual(7);
+    });
   });
 });
 
