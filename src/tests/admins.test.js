@@ -119,7 +119,7 @@ describe('DELETE /delete/:id', () => {
     expect(response.status).toBe(204);
     expect(response.body.error).toBeFalsy();
   });
-  test('response should return a 400 satus', async () => {
+  test('response should return a 404 satus', async () => {
     const response = await request(app).delete('/api/admins/6282a72e4fc3cd510123ee20').send();
     expect(response.status).toBe(404);
   });
