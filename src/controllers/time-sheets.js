@@ -8,7 +8,7 @@ const listTimesheets = async (req, res) => {
       .populate('project');
 
     return res.status(200).json({
-      status: 'success',
+      message: 'Success',
       data,
       error: false,
     });
@@ -23,12 +23,12 @@ const listTimesheets = async (req, res) => {
 
 const getById = async (req, res) => {
   try {
-    const result = await TimeSheets.findById(req.params.id)
+    const data = await TimeSheets.findById(req.params.id)
       .populate('task')
       .populate('employee')
       .populate('project');
 
-    if (!result) {
+    if (!data) {
       return res.status(404).json({
         message: `Id ${req.params.id} does not exist`,
         data: undefined,
@@ -36,8 +36,8 @@ const getById = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'success',
-      data: result,
+      message: 'Success',
+      data,
       error: false,
     });
   } catch (error) {
@@ -58,15 +58,8 @@ const createTimesheet = async (req, res) => {
       startTime: req.body.startTime,
       endTime: req.body.endTime,
       task: req.body.task,
-      employee: {
-        name: req.body.employee.name,
-        lastName: req.body.employee.lastName,
-        role: req.body.employee.role,
-      },
-      project: {
-        name: req.body.project.name,
-        description: req.body.project.description,
-      },
+      employee: req.body.employee,
+      project: req.body.project,
     });
     const result = await timesheet.save();
     return res.status(201).json({
