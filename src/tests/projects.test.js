@@ -1,17 +1,20 @@
 import request from 'supertest';
 import app from '../app';
 import Projects from '../models/Projects';
+import Employees from '../models/Employees';
 import projectsSeed from '../seeds/projects';
+import employeesSeed from '../seeds/employees';
 
 beforeAll(async () => {
   await Projects.collection.insertMany(projectsSeed);
+  await Employees.collection.insertMany(employeesSeed);
 });
 
 let projectId;
 
 describe('POST /projects', () => {
-  test('Response should return a status 201', async () => {
-    const response = await request(app).post('/api/projects').send({
+  test('Should create an project', async () => {
+    const response = await request(app).post('/api/projects/').send({
       name: 'Project Example',
       description: 'This text is an example for the task 10',
       status: 'false',
@@ -112,15 +115,15 @@ describe('DELETE /projects/:id', () => {
   });
 
   test('Response should return a non empty message', async () => {
-    const response = await request(app).delete('/api/projects/63368d18482f9756687f5b41').send();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    const response = await request(app).delete(`/api/projects/${projectId}`).send();
+    expect(response.body.message).toEqual('The project was successfully deleted');
   });
 
-  test('Response should return a status 200', async () => {
+  test('Response should return a status 204', async () => {
     const response = await request(app).delete(`/api/projects/${projectId}`).send();
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(204);
     expect(response.body.error).toBe(false);
     expect(response.body.data).not.toBeUndefined();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(response.body.message).toEqual('The project was successfully deleted');
   });
 });

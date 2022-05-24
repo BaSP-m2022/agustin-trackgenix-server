@@ -1,3 +1,6 @@
+import { required } from 'joi';
+import employees from '../controllers/employees';
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -10,13 +13,11 @@ const projectSchema = new Schema(
     client: { type: String, required: true },
     // startDate: { type: Date, required: true },
     // endDate: { type: Date, required: true },
-    employees: [
-      {
-        name: { type: String, required: true },
-        lastName: { type: String, required: true },
-        role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
-      },
-    ],
+    employees: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Employee',
+    },
     rates:
       {
         dev: { type: Number, required: true },
