@@ -1,22 +1,25 @@
 import Employees from '../models/Employees';
 
-const listEmployees = (req, res) => {
-  Employees.find(req.query)
-    .then((employee) => res.status(200).json({
+const listEmployees = async (req, res) => {
+  try {
+    const list = await Employees.find(req.query).populate('projects');
+    return res.status(200).json({
       message: 'Employees listed successfully',
-      data: employee,
+      data: list,
       error: false,
-    }))
-    .catch((error) => res.status(400).json({
+    });
+  } catch (error) {
+    return res.status(400).json({
       message: error.message,
       data: undefined,
       error: true,
-    }));
+    });
+  }
 };
 
 const getById = async (req, res) => {
   try {
-    const result = await Employees.findById(req.params.id);
+    const result = await Employees.findById(req.params.id).populate('projects');
     if (!result) {
       return res.status(404).json({
         message: `Id ${req.params.id} does not exist`,
@@ -63,7 +66,6 @@ const deleteEmployee = async (req, res) => {
 };
 
 const createEmployee = async (req, res) => {
-  const { project } = req.body;
   try {
     const employee = new Employees({
       name: req.body.name,
@@ -76,7 +78,7 @@ const createEmployee = async (req, res) => {
       zip: req.body.zip,
       status: true,
       role: req.body.role,
-      project,
+      projects: req.body.projects,
     });
     const result = await employee.save();
     return res.status(201).json({
