@@ -3,13 +3,13 @@ import Employees from '../models/Employees';
 const listEmployees = async (req, res) => {
   try {
     const list = await Employees.find(req.query).populate('projects');
-    res.status(200).json({
+    return res.status(200).json({
       message: 'Employees listed successfully',
       data: list,
       error: false,
     });
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       message: error.message,
       data: undefined,
       error: true,
