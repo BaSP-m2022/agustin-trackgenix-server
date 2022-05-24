@@ -114,16 +114,8 @@ describe('DELETE /projects/:id', () => {
     expect(response.body.data).toBeUndefined();
   });
 
-  test('Response should return a non empty message', async () => {
-    const response = await request(app).delete(`/api/projects/${projectId}`).send();
-    expect(response.body.message).toEqual('The project was successfully deleted');
-  });
-
   test('Response should return a status 204', async () => {
     const response = await request(app).delete(`/api/projects/${projectId}`).send();
     expect(response.status).toBe(204);
-    expect(response.body.error).toBe(false);
-    expect(response.body.data).not.toBeUndefined();
-    expect(response.body.message).toEqual('The project was successfully deleted');
   });
 });

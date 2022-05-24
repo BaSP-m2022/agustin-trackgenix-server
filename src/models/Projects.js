@@ -1,6 +1,3 @@
-import { required } from 'joi';
-import employees from '../controllers/employees';
-
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
