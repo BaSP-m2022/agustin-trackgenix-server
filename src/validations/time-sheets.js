@@ -19,7 +19,7 @@ const validateCreate = (req, res, next) => {
   const validate = timesheetValidation.validate(req.body);
   if (validate.error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
       data: validate.error.details[0].message,
       error: true,
     });
@@ -46,8 +46,8 @@ const validateUpdate = (req, res, next) => {
   const validate = timesheetValidation.validate(req.body);
   if (validate.error) {
     return res.status(400).json({
-      msg: 'There was an error',
-      data: validate.error,
+      message: 'There was an error',
+      data: validate.error.details[0].message,
       error: true,
     });
   }
