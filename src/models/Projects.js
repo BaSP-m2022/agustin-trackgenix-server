@@ -13,7 +13,7 @@ const projectSchema = new Schema(
     employees: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        require: true,
+        required: true,
         ref: 'Employee',
       },
     ],
