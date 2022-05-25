@@ -115,11 +115,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'true',
+      status: true,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
@@ -143,11 +143,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'true',
+      status: true,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
@@ -161,11 +161,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'false',
+      status: false,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
@@ -179,11 +179,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'false',
+      status: false,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
@@ -197,11 +197,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'false',
+      status: false,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
@@ -215,11 +215,11 @@ describe('PUT /projects/:id', () => {
     const response = await request(app).put(`/api/projects/${projectId}`).send({
       name: 'Project New Example',
       description: 'This text is an another example for the task 10',
-      status: 'false',
+      status: false,
       client: 'Nantendo',
-      employees: [{
-        _id: '62898d14882f8759987f5a37',
-      }],
+      employees: [
+        '62898d14882f8759987f5a37',
+      ],
       rates: {
         dev: 28,
         pm: 55,
