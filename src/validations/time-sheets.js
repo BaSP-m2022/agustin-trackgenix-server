@@ -1,17 +1,6 @@
 import Joi from 'joi';
 
 const validateCreate = (req, res, next) => {
-  const employeeSchema = Joi.object({
-    name: Joi.string().min(4).max(50).required(),
-    lastName: Joi.string().min(4).max(50).required(),
-    role: Joi.string().valid('DEV', 'QA', 'PM').required(),
-  });
-
-  const projectSchema = Joi.object({
-    name: Joi.string().min(4).max(50).required(),
-    description: Joi.string().lowercase().required(),
-  });
-
   const timesheetValidation = Joi.object({
     date: Joi.date().max('now').required(),
     regularHours: Joi.number().integer().min(0).max(12)
@@ -22,10 +11,9 @@ const validateCreate = (req, res, next) => {
       .required(),
     endTime: Joi.number().integer().min(0).max(2400)
       .required(),
-    task: Joi.string().lowercase().min(4).max(50)
-      .required(),
-    employee: employeeSchema,
-    project: projectSchema,
+    task: Joi.string().alphanum().length(24).required(),
+    employee: Joi.string().alphanum().length(24).required(),
+    project: Joi.string().alphanum().length(24).required(),
   });
 
   const validate = timesheetValidation.validate(req.body);
@@ -40,17 +28,6 @@ const validateCreate = (req, res, next) => {
 };
 
 const validateUpdate = (req, res, next) => {
-  const employeeSchema = Joi.object({
-    name: Joi.string().min(4).max(50).optional(),
-    lastName: Joi.string().min(4).max(50).optional(),
-    role: Joi.string().valid('DEV', 'QA', 'PM').optional(),
-  });
-
-  const projectSchema = Joi.object({
-    name: Joi.string().min(4).max(50).optional(),
-    description: Joi.string().lowercase().optional(),
-  });
-
   const timesheetValidation = Joi.object({
     date: Joi.date().max('now').optional(),
     regularHours: Joi.number().integer().min(0).max(12)
@@ -61,17 +38,16 @@ const validateUpdate = (req, res, next) => {
       .optional(),
     endTime: Joi.number().integer().min(0).max(2400)
       .optional(),
-    task: Joi.string().lowercase().min(4).max(50)
-      .optional(),
-    employee: employeeSchema,
-    project: projectSchema,
+    task: Joi.string().alphanum().length(24).optional(),
+    employee: Joi.string().alphanum().length(24).optional(),
+    project: Joi.string().alphanum().length(24).optional(),
   });
 
   const validate = timesheetValidation.validate(req.body);
   if (validate.error) {
     return res.status(400).json({
       msg: 'There was an error',
-      data: validate.error.details[0].message,
+      data: validate.error,
       error: true,
     });
   }
