@@ -8,7 +8,7 @@ const validateTaskCreation = (req, res, next) => {
   const validation = taskValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error while the validation was requested',
+      message: 'There was an error while the validation was requested',
       data: validation.error.details[0].message,
       error: true,
     });
@@ -23,7 +23,7 @@ const validateTaskModify = (req, res, next) => {
   const validation = taskValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error while the validation was requested',
+      message: 'There was an error while the validation was requested',
       data: validation.error.details[0].message,
       error: true,
     });
