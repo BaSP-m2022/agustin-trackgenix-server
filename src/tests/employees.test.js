@@ -10,6 +10,8 @@ beforeAll(async () => {
   await Project.collection.insertMany(projectsSeed);
 });
 
+let idEmployeeCreated;
+
 describe('GET /employees', () => {
   test('Response should return a status 404', async () => {
     const response = await request(app).get('/api/employe').send();
@@ -166,8 +168,6 @@ describe('GET BY ID /employees/:id', () => {
   });
 });
 
-let idEmployeeCreated;
-
 describe('POST /employees', () => {
   test('With an correct user the response should return a status 201', async () => {
     const response = await request(app).post('/api/employees').send({
@@ -185,9 +185,9 @@ describe('POST /employees', () => {
         '628af068c5554a93f700e8be',
       ],
     });
-    expect(response.status).toBe(201);
     // eslint-disable-next-line no-underscore-dangle
     idEmployeeCreated = response.body.data._id;
+    expect(response.status).toBe(201);
   });
 
   test('With an correct user the response should return a error false', async () => {
@@ -267,6 +267,175 @@ describe('POST /employees', () => {
   });
 });
 
+describe('UPDATE /employees/id', () => {
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: 'Grego',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      lastName: 'Elias',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      email: 'testtest@gmail.com',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      password: 'loro1234',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      dni: 1745238,
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      address: 'Rondeau 123',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      city: 'Cordoba',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      zip: 3000,
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      status: false,
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      role: 'DEV',
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      projects: [
+        '628af068c5554a93f700e8be',
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
+
+  test('Response should return a false error', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: 'Grego',
+    });
+    expect(response.error).toBeFalsy();
+  });
+
+  test('Response should return a correct message', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: 'Grego',
+    });
+    expect(response.body.message).toEqual('Employee updated successfully');
+  });
+
+  test('Wrong path should return a 404 status', async () => {
+    const response = await request(app).put('/api/employee').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('If the first name is empty, response should return a 400 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the last name is empty, response should return a 400 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      lastName: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the email is empty, response should return a 400 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      email: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the password is empty, response should return a 400 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      password: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('If the status is empty, response should return a 400 status', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      status: '',
+    });
+    expect(response.status).toBe(400);
+  });
+
+  test('Response should return a true error', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
+      dni: '',
+      address: '',
+      city: '',
+      zip: '',
+      status: '',
+      role: '',
+      projects: [],
+    });
+    expect(response.error).toBeTruthy();
+  });
+
+  test('Response should return an error message', async () => {
+    const response = await request(app).put(`/api/employees/${idEmployeeCreated}`).send({
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
+      dni: '',
+      address: '',
+      city: '',
+      zip: '',
+      status: '',
+      role: '',
+      projects: [],
+    });
+    expect(response.body.message).toEqual('There was an error with the validation');
+  });
+});
+
 // ----------DELETE----------
 describe('DELETE /employees/:id', () => {
   test('With an incorrect id the response should return a status 400', async () => {
@@ -296,7 +465,7 @@ describe('DELETE /employees/:id', () => {
 
   test('With an nonexistent id the response should return a non empty message', async () => {
     const response = await request(app).delete('/api/employees/62898d14882f8759987f5b50').send();
-    expect(response.body.message.length).toBeGreaterThan(5);
+    expect(response.body.message).toEqual('Id 62898d14882f8759987f5b50 does not exist');
   });
 
   test('With an correct id the response should return a status 204', async () => {
