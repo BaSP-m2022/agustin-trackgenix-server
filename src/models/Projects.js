@@ -6,15 +6,15 @@ const projectSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    status: { type: String, required: true },
+    status: { type: Boolean, required: true },
     client: { type: String, required: true },
     // startDate: { type: Date, required: true },
     // endDate: { type: Date, required: true },
     employees: [
       {
-        name: { type: String, required: true },
-        lastName: { type: String, required: true },
-        role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Employee',
       },
     ],
     rates:
