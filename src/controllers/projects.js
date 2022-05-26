@@ -2,7 +2,7 @@ import Projects from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Projects.find(req.query);
+    const projects = await Projects.find(req.query).populate('employees');
     if (projects.length < 1) {
       return res.status(404).json({
         message: 'Projects has not been found',
@@ -16,7 +16,7 @@ const getAllProjects = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,
@@ -53,7 +53,7 @@ const createProject = (req, res) => {
 const getProjectById = async (req, res) => {
   try {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-      const project = await Projects.findById(req.params.id);
+      const project = await Projects.findById(req.params.id).populate('employees');
       if (!project) {
         return res.status(404).json({
           message: `Project with id: ${req.params.id} has not been found`,
@@ -73,7 +73,7 @@ const getProjectById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,
@@ -108,7 +108,7 @@ const updateProject = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'An error ocurred',
       data: error.message,
       error: true,

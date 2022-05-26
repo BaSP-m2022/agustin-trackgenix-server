@@ -9,7 +9,7 @@ const validateCreate = (req, res, next) => {
   const projectValidation = Joi.object({
     name: Joi.string().min(4).max(50).required(),
     description: Joi.string().required(),
-    status: Joi.string().required(),
+    status: Joi.boolean().required(),
     client: Joi.string().required(),
     employees: Joi.array().items(Joi.string().alphanum().length(24)).optional(),
     rates: ratesSchema,
@@ -33,7 +33,7 @@ const validateUpdate = (req, res, next) => {
   const projectValidation = Joi.object({
     name: Joi.string().min(4).max(50).optional(),
     description: Joi.string().optional(),
-    status: Joi.string().optional(),
+    status: Joi.boolean().optional(),
     client: Joi.string().optional(),
     employees: Joi.array().items(Joi.string().alphanum().length(24)).optional(),
     rates: ratesSchema.optional(),
