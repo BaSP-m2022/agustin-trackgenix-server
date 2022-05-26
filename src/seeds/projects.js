@@ -1,19 +1,17 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('628281797161c78df5f6ac8c'),
-  name: 'Preparation',
-  description: 'This is a project to prepare a surprise party',
-  status: 'Activo',
-  client: 'Trackgenix SA',
-  employees: {
-    name: 'Carlos',
-    lastName: 'Moreyra',
-    role: 'DEV',
-  },
+  _id: mongoose.Types.ObjectId('628af068c5554a93f700e8be'),
+  name: 'Project Example',
+  description: 'This text is an example for the task 10',
+  status: 'false',
+  client: 'Monsters, Inc.',
+  employees: [
+    '62898d14882f8759987f5a37',
+  ],
   rates: {
-    dev: 5,
-    pm: 2,
-    qa: 4,
+    dev: 27,
+    pm: 65,
+    qa: 22,
   },
 }];
