@@ -19,7 +19,7 @@ const validateCreate = (req, res, next) => {
   const validate = employeeValidation.validate(req.body);
   if (validate.error) {
     return res.status(400).json({
-      msg: 'There was an error with the validation',
+      message: 'There was an error with the validation',
       data: validate.error.details[0].message,
       error: true,
     });
@@ -33,19 +33,20 @@ const validateUpdate = (req, res, next) => {
     lastName: Joi.string().optional().min(3).max(30),
     email: Joi.string().email().lowercase().optional(),
     password: Joi.string().optional().alphanum().min(8),
-    dni: Joi.number().optional().min(7).max(8),
+    dni: Joi.number().integer().min(1000000).max(99999999)
+      .optional(),
     address: Joi.string().optional().min(5).max(30),
     city: Joi.string().optional().min(3).max(30),
-    zip: Joi.number().optional().min(4).max(5),
+    zip: Joi.number().optional().min(1000).max(9999),
     status: Joi.boolean().optional(),
     role: Joi.string().valid('DEV', 'QA', 'PM').optional(),
-    projects: Joi.array().items(Joi.string().alphanum().length(24)).required(),
+    projects: Joi.array().items(Joi.string().alphanum().length(24)).optional(),
   });
 
   const validate = employeeValidation.validate(req.body);
   if (validate.error) {
     return res.status(400).json({
-      msg: 'There was an error with the validation',
+      message: 'There was an error with the validation',
       data: validate.error.details[0].message,
       error: true,
     });
