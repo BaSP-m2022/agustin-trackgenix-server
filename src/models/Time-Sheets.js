@@ -8,16 +8,21 @@ const timesheetSchema = new Schema({
   overtimeHours: { type: Number, required: true },
   startTime: { type: Number, required: true },
   endTime: { type: Number, required: true },
-  task: { type: String, required: true },
+  task: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Task',
+  },
   employee: {
-    name: { type: String, required: true },
-    lastName: { type: String, required: true },
-    role: { type: String, required: true, enum: ['DEV', 'QA', 'PM'] },
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Employee',
   },
   project: {
-    name: { type: String, required: true },
-    description: { type: String, required: true },
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Project',
   },
 }, { timestamps: true });
 
-export default mongoose.model('timesheet', timesheetSchema);
+export default mongoose.model('TimeSheet', timesheetSchema);
