@@ -10,13 +10,11 @@ const projectSchema = new Schema(
     client: { type: String, required: true },
     // startDate: { type: Date, required: true },
     // endDate: { type: Date, required: true },
-    employees: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Employee',
-      },
-    ],
+    employees: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Employee',
+    },
     rates:
       {
         dev: { type: Number, required: true },
