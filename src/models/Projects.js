@@ -6,7 +6,7 @@ const projectSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    status: { type: String, required: true },
+    status: { type: Boolean, required: true },
     client: { type: String, required: true },
     // startDate: { type: Date, required: true },
     // endDate: { type: Date, required: true },
@@ -14,7 +14,7 @@ const projectSchema = new Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Employees',
+        ref: 'Employee',
       },
     ],
     rates:

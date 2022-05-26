@@ -2,7 +2,7 @@ import Projects from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Projects.find(req.query).populate('projects');
+    const projects = await Projects.find(req.query).populate('employees');
     if (projects.length < 1) {
       return res.status(404).json({
         message: 'Projects has not been found',
