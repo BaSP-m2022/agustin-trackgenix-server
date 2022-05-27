@@ -11,7 +11,7 @@ const validateCreate = (req, res, next) => {
   const validations = authSchema.validate(req.body);
   if (validations.error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
       data: validations.error.details[0].message,
       error: true,
     });
@@ -30,7 +30,7 @@ const validateUpdate = (req, res, next) => {
   const validations = authSchema.validate(req.body);
   if (validations.error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
       data: validations.error.details[0].message,
       error: true,
     });
